@@ -2,7 +2,7 @@ module Montgomery (
     input          i_clk,
     input          i_rst,
     input          i_start,
-    input  [255:0] i_N, i_a, i_b,
+    input  [255:0] i_a, i_b,
     output [255:0] o_montgomery,
     output         o_finished
 );
@@ -12,12 +12,13 @@ module Montgomery (
     } state_t;
 
     localparam cycles = 256;
+    localparam N = 256'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
 
     state_t state_r, state_w;
     logic [257:0] tmp [0:1];
     logic [257:0] m_r;
     logic [257:0] m_w;
-    logic [255:0] N, a, b;
+    logic [255:0] a, b;
     logic [255:0] o_montgomery_r;
     logic o_finished_r;
     logic [8:0] cycle_r, cycle_w;
@@ -54,8 +55,8 @@ module Montgomery (
         endcase
     end
 
-    always_ff @(posedge i_clk or negedge i_rst) begin
-        if (~i_rst) begin
+    always_ff @(posedge i_clk) begin
+        if (i_rst) begin
             m_r <= 0;
             state_r <= S_IDLE;
             cycle_r <= 0;
@@ -63,14 +64,12 @@ module Montgomery (
             o_montgomery_r <= 0;
             a <= 0;
             b <= 0;
-            N <= 0;
         end else begin
             o_finished_r <= 0;
             o_montgomery_r <= (m_r >= {2'b0, N}) ? m_r - N : m_r;
             state_r <= state_w;
             cycle_r <= cycle_w;
             if (state_r == S_IDLE && state_w == S_CALC) begin
-                N <= i_N;
                 a <= i_a;
                 b <= i_b;
                 m_r <= 0;
