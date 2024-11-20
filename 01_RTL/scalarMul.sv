@@ -55,7 +55,7 @@ module ScalarMul (
         z_w = z_r;
         xp_w = xp_r;
         yp_w = yp_r;
-        finished_w = finished_r;
+        finished_w = 0;
         cnt_w = cnt_r;
         pointAdd_start = 0;
         pointAdd_x2 = 0;

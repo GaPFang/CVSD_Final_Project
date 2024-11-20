@@ -2,8 +2,8 @@ module Montgomery (
     input          i_clk,
     input          i_rst,
     input          i_start,
-    input  [255:0] i_a, i_b,
-    output [255:0] o_montgomery,
+    input  [254:0] i_a, i_b,
+    output [254:0] o_montgomery,
     output         o_finished
 );
     typedef enum logic {
@@ -11,15 +11,15 @@ module Montgomery (
         S_CALC
     } state_t;
 
-    localparam cycles = 256;
-    localparam N = 256'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
+    localparam cycles = 255;
+    localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
 
     state_t state_r, state_w;
-    logic [257:0] tmp [0:1];
-    logic [257:0] m_r;
-    logic [257:0] m_w;
-    logic [255:0] a, b;
-    logic [255:0] o_montgomery_r;
+    logic [256:0] tmp [0:1];
+    logic [256:0] m_r;
+    logic [256:0] m_w;
+    logic [254:0] a, b;
+    logic [254:0] o_montgomery_r;
     logic o_finished_r;
     logic [8:0] cycle_r, cycle_w;
     integer i;

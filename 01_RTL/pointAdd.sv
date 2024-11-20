@@ -2,20 +2,20 @@ module PointAdd(
     input i_clk,
     input i_rst,
     input i_start,
-    input [255:0] i_x1,
-    input [255:0] i_y1,
-    input [255:0] i_z1,
-    input [255:0] i_x2,
-    input [255:0] i_y2,
-    input [255:0] i_z2,
-    output [255:0] o_x3,
-    output [255:0] o_y3,
-    output [255:0] o_z3,
+    input [254:0] i_x1,
+    input [254:0] i_y1,
+    input [254:0] i_z1,
+    input [254:0] i_x2,
+    input [254:0] i_y2,
+    input [254:0] i_z2,
+    output [254:0] o_x3,
+    output [254:0] o_y3,
+    output [254:0] o_z3,
     output o_finished
 );
 
-    localparam dR = 256'd20131754669644349956395353228418582963360511446355554149282842162308175096314;
-    localparam R_pow_8 = 256'd4347792138496;
+    localparam dR = 255'h164115ad394fe29372c9c903de0c43480850c3bbd7e314b9c076c5ff6fa3f4fd;
+    localparam R_pow_8 = 255'h3f44c9b21;
 
     logic finished_r, finished_w;
 
@@ -33,15 +33,15 @@ module PointAdd(
 
     state_t state_r, state_w;
 
-    logic [255:0] x1_r, y1_r, z1_r, x2_r, y2_r, z2_r, x1x2_r, y1y2_r, x1y2_r, x2y1_r, z1z2_r, z1z2z1z2_r, x1x2y1y2_r, dx1x2y1y2_r, z1z2_x1y2_x2y1_r, z1z2_x1x2_y1y2_r, x3_r, y3_r, z3_r;
-    logic [255:0] x1_w, y1_w, z1_w, x2_w, y2_w, z2_w, x1x2_w, y1y2_w, x1y2_w, x2y1_w, z1z2_w, z1z2z1z2_w, x1x2y1y2_w, dx1x2y1y2_w, z1z2_x1y2_x2y1_w, z1z2_x1x2_y1y2_w, x3_w, y3_w, z3_w;
+    logic [254:0] x1_r, y1_r, z1_r, x2_r, y2_r, z2_r, x1x2_r, y1y2_r, x1y2_r, x2y1_r, z1z2_r, z1z2z1z2_r, x1x2y1y2_r, dx1x2y1y2_r, z1z2_x1y2_x2y1_r, z1z2_x1x2_y1y2_r, x3_r, y3_r, z3_r;
+    logic [254:0] x1_w, y1_w, z1_w, x2_w, y2_w, z2_w, x1x2_w, y1y2_w, x1y2_w, x2y1_w, z1z2_w, z1z2z1z2_w, x1x2y1y2_w, dx1x2y1y2_w, z1z2_x1y2_x2y1_w, z1z2_x1x2_y1y2_w, x3_w, y3_w, z3_w;
 
-    logic [255:0] x1y2_x2y1_r, x1x2_y1y2_r, z1z2z1z2_add_dx1x2y1y2_r, z1z2z1z2_sub_dx1x2y1y2_r;
-    logic [255:0] x1y2_x2y1_w, x1x2_y1y2_w, z1z2z1z2_add_dx1x2y1y2_w, z1z2z1z2_sub_dx1x2y1y2_w;
+    logic [254:0] x1y2_x2y1_r, x1x2_y1y2_r, z1z2z1z2_add_dx1x2y1y2_r, z1z2z1z2_sub_dx1x2y1y2_r;
+    logic [254:0] x1y2_x2y1_w, x1x2_y1y2_w, z1z2z1z2_add_dx1x2y1y2_w, z1z2z1z2_sub_dx1x2y1y2_w;
 
     logic i_montgomery_start_r, i_montgomery_start_w;
-    logic [255:0] i_a1_r, i_b1_r, i_a2_r, i_b2_r, i_a1_w, i_b1_w, i_a2_w, i_b2_w;
-    logic [255:0] o_montgomery1, o_montgomery2;
+    logic [254:0] i_a1_r, i_b1_r, i_a2_r, i_b2_r, i_a1_w, i_b1_w, i_a2_w, i_b2_w;
+    logic [254:0] o_montgomery1, o_montgomery2;
     logic o_montgomery_finished;
 
     assign o_x3 = x3_r;
@@ -69,8 +69,8 @@ module PointAdd(
         .o_finished()
     );
 
-    function [255:0] modularAdd;
-        input [255:0] a, b;
+    function [254:0] modularAdd;
+        input [254:0] a, b;
         logic [256:0] add;
         localparam N = 257'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
         begin
@@ -82,8 +82,8 @@ module PointAdd(
         end
     endfunction
 
-    function [255:0] modularSub;
-        input [255:0] a, b;
+    function [254:0] modularSub;
+        input [254:0] a, b;
         logic [256:0] sub;
         localparam N = 257'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
         begin
