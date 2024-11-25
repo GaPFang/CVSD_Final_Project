@@ -75,12 +75,18 @@ class point:
 		Y3 = Z1Z2*(self.Y*other.Y+self.X*other.X)*(Z1Z2*Z1Z2+d*X1X2Y1Y2)
 		Z3 = (Z1Z2*Z1Z2-d*X1X2Y1Y2)*(Z1Z2*Z1Z2+d*X1X2Y1Y2)
 		return point(X3,Y3,Z3)
+	
+	def double(self) -> 'point':
+		X3 = number(2)*self.X*self.Y*(number(2)*self.Z*self.Z-(self.Y*self.Y-self.X*self.X))
+		Y3 = (self.Y*self.Y-self.X*self.X)*(self.X*self.X+self.Y*self.Y)
+		Z3 = (self.Y*self.Y-self.X*self.X)*(number(2)*self.Z*self.Z-(self.Y*self.Y-self.X*self.X))
+		return point(X3,Y3,Z3)
 
 	def __mul__(self, M: int) -> 'point':
 		r = point(number(0), number(1))  # the zero point
 		M_in_bin = "{:0255b}".format(M)
 		for i in range(255):
-			r = r + r
+			r = r.double()
 			if(M_in_bin[i]=="1"):
 				r = r + self
 		return r
