@@ -71,9 +71,10 @@ module ScalarMul (
                     yp_w = i_y;
                     M_w = i_M;
                     pointAdd_start = 1;
-                    pointAdd_x2 = x_r;
-                    pointAdd_y2 = y_r;
-                    pointAdd_z2 = z_r;
+                    // pointAdd_x2 = x_r;
+                    // pointAdd_y2 = y_r;
+                    // pointAdd_z2 = z_r;
+                    pointAdd_doubling = 1;
                 end
                 if(pointAdd_finished) begin
                     x_w = pointAdd_x3;
@@ -91,9 +92,10 @@ module ScalarMul (
                             finished_w = 1;
                         end else begin
                             pointAdd_start = 1;
-                            pointAdd_x2 = pointAdd_x3;
-                            pointAdd_y2 = pointAdd_y3;
-                            pointAdd_z2 = pointAdd_z3;
+                            // pointAdd_x2 = pointAdd_x3;
+                            // pointAdd_y2 = pointAdd_y3;
+                            // pointAdd_z2 = pointAdd_z3;
+                            pointAdd_doubling = 1;
                         end
                     end
                 end
