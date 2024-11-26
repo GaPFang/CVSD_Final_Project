@@ -94,11 +94,11 @@ class point:
 		P_double = self.double()
 		tmp = self
 		Ps = [tmp]
-		for i in range(pow(2, w-1) - 1):
+		for i in range(pow(2, w-2) - 1):
 			tmp = tmp + P_double
 			Ps.append(tmp)
-		for i in range(pow(2, w-1)):
-			Ps.append(-Ps[w-1-i])
+		for i in range(pow(2, w-2)):
+			Ps.append(-Ps[pow(2, w-2)-1-i])
 
 		naf = toNAF(M, w)
 		r = point(number(0), number(1))
@@ -133,11 +133,13 @@ def toNAF(x, w):
 		if(x%2==1):
 			tmp = x%pow(2,w)
 			naf.append(tmp)
-			x -= tmp
+			if (tmp < pow(2,w-1)):
+				x -= tmp
+			else:
+				x -= (tmp - pow(2,w))
 		else:
 			naf.append(0)
 		x = x//2
-	print(naf)
 	return naf
 
 if __name__ == "__main__":
@@ -156,7 +158,7 @@ if __name__ == "__main__":
 	#x = number(0x5b90ea17eaf962ef96588677a54b09c016ad982c842efa107c078796f88449a8)
 	#y = number(0x6a210d43f514ec3c7a8e677567ad835b5c2e4bc5dd3480e135708e41b42c0ac6)
 
-	point_P = point(x, y, number(1))
+	point_P = point(x, y)
 	point_G = (point_P * scalar_M).reduce()
 	print("point P:")
 	print(point_P)

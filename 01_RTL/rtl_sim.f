@@ -31,7 +31,7 @@
 // Your Design Files
 // -----------------------------------------------------------------------------
 ./ed25519.sv
-./scalarMul.sv
+./scalarMul_wNAF.sv
 ./pointAdd.sv
 ./montgomery.sv
 ./reduction.sv
