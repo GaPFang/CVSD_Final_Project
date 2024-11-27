@@ -19,13 +19,10 @@ module tb_pointAdd();
         .i_clk(clk),
         .i_rst(reset),
         .i_start(start),
-        .i_doubling(0),
+        .i_doubling(1),
         .i_x1(x1),
         .i_y1(y1),
         .i_z1(z1),
-        .i_x2(x2),
-        .i_y2(y2),
-        .i_z2(z2),
         .o_x3(x3),
         .o_y3(y3),
         .o_z3(z3),
@@ -37,9 +34,9 @@ module tb_pointAdd();
 
     task verify_output;
         input [255:0] x3, y3, z3;
-        localparam x = 256'h5DC8E95ACC20971BA02DE2460B05D9909A9608021DFB798DBA7394AF98D6A57F;
-        localparam y = 256'h554AA4BB1B239F79C9AFE0C8FE2AE223A98026ADCF5F3B8667BFA55B000B8881;
-        localparam z = 256'h69C2DD41EF59BEC7AA8140EF60A6639AAE0C828E81FAEC12BE7068C9640A1AC;
+        localparam x = 256'h06b6f8d452485937ee2bdce38b932964d659d42349698c40a187786b532b415b;
+        localparam y = 256'h578262c1f319aa7e3a73eb4970ae2f55b8da108830a23b9c7f627e3ba96bf69c;
+        localparam z = 256'h032a6a5213a6f749cbb37819442d304e9ee2dd362be2965926c4d2e4918582f4;
         begin
             if (x3 == x && y3 == y && z3 == z) begin
                 $display("Test passed: x3 = %h, y3 = %h, z3 = %h", x3, y3, z3);
@@ -50,7 +47,7 @@ module tb_pointAdd();
     endtask
 
     initial begin
-        $dumpfile("pointAdd.vcd");
+        $dumpfile("pointDoubling.vcd");
         $dumpvars();
     end
 
@@ -75,9 +72,6 @@ module tb_pointAdd();
         x1 = 51169388680954780618255949183088705830597642531673777941256840852923233932582;
         y1 = 38023371316134590270444440476521181483750022538757642829225406787274294448402;
         z1 = 47908574844383975721735585330619112154511882220818545990695845831320904662833;
-        x2 = 7075909580202862594128302673554914659407030209928197693208324339654829354926;
-        y2 = 21286769175881002626746167682496214460774588269525023793279114113306181287586;
-        z2 = 1;
         start = 1;
         #10 start = 0;
 

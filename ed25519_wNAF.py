@@ -56,10 +56,13 @@ class number:
 		#calculate value1/value2 mod p
 		r = self*r
 		return r
+
+	def __neg__(self) -> 'number':
+		return number(q-self.value)
 	
 	def __eq__(self, other: 'number') -> bool: 	# used for debug
 		return self.value==other.value
-	
+
 
 d = number(0x52036cee2b6ffe738cc740797779e89800700a4d4141d8ab75eb4dca135978a3)
 class point:
@@ -67,6 +70,9 @@ class point:
 		self.X = number_X
 		self.Y = number_Y
 		self.Z = number_Z
+
+	def __neg__(self) -> 'point':
+		return point(self.X, -self.Y, self.Z)
 
 	def __add__(self, other: 'point') -> 'point':
 		Z1Z2 = self.Z*other.Z
@@ -83,12 +89,23 @@ class point:
 		return point(X3,Y3,Z3)
 
 	def __mul__(self, M: int) -> 'point':
-		r = point(number(0), number(1))  # the zero point
-		M_in_bin = "{:0255b}".format(M)
-		for i in range(255):
+		w = 3
+
+		P_double = self.double()
+		tmp = self
+		Ps = [tmp]
+		for i in range(pow(2, w-2) - 1):
+			tmp = tmp + P_double
+			Ps.append(tmp)
+		for i in range(pow(2, w-2)):
+			Ps.append(-Ps[pow(2, w-2)-1-i])
+
+		naf = toNAF(M, w)
+		r = point(number(0), number(1))
+		for i in range(len(naf) - 1, -1, -1):
 			r = r.double()
-			if(M_in_bin[i]=="1"):
-				r = r + self
+			if(naf[i]!=0):
+				r = r + Ps[naf[i] // 2]
 		return r
 
 	def reduce(self) -> 'point':
@@ -109,7 +126,21 @@ class point:
 		else:
 			text = "Invalid point"
 		return text
-
+	
+def toNAF(x, w):
+	naf = []
+	while(x!=0):
+		if(x%2==1):
+			tmp = x%pow(2,w)
+			naf.append(tmp)
+			if (tmp < pow(2,w-1)):
+				x -= tmp
+			else:
+				x -= (tmp - pow(2,w))
+		else:
+			naf.append(0)
+		x = x//2
+	return naf
 
 if __name__ == "__main__":
 	#testcase 1

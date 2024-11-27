@@ -22,7 +22,7 @@ module ScalarMul (
     logic [254:0] xp_r, yp_r, xp_w, yp_w;
     logic finished_r, finished_w;
     logic [254:0] pointAdd_x2, pointAdd_y2, pointAdd_z2, pointAdd_x3, pointAdd_y3, pointAdd_z3;
-    logic pointAdd_start, pointAdd_finished;
+    logic pointAdd_start, pointAdd_finished, pointAdd_doubling;
 
     assign o_x = x_r;
     assign o_y = y_r;
@@ -35,6 +35,7 @@ module ScalarMul (
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_start(pointAdd_start),
+        .i_doubling(pointAdd_doubling),
         .i_x1(x_w),
         .i_y1(y_w),
         .i_z1(z_w),
@@ -61,6 +62,7 @@ module ScalarMul (
         pointAdd_x2 = 0;
         pointAdd_y2 = 0;
         pointAdd_z2 = 0;
+        pointAdd_doubling = 0;
         case(state_r)
             S_1: begin
                 if (i_start) begin
@@ -69,9 +71,10 @@ module ScalarMul (
                     yp_w = i_y;
                     M_w = i_M;
                     pointAdd_start = 1;
-                    pointAdd_x2 = x_r;
-                    pointAdd_y2 = y_r;
-                    pointAdd_z2 = z_r;
+                    // pointAdd_x2 = x_r;
+                    // pointAdd_y2 = y_r;
+                    // pointAdd_z2 = z_r;
+                    pointAdd_doubling = 1;
                 end
                 if(pointAdd_finished) begin
                     x_w = pointAdd_x3;
@@ -89,9 +92,10 @@ module ScalarMul (
                             finished_w = 1;
                         end else begin
                             pointAdd_start = 1;
-                            pointAdd_x2 = pointAdd_x3;
-                            pointAdd_y2 = pointAdd_y3;
-                            pointAdd_z2 = pointAdd_z3;
+                            // pointAdd_x2 = pointAdd_x3;
+                            // pointAdd_y2 = pointAdd_y3;
+                            // pointAdd_z2 = pointAdd_z3;
+                            pointAdd_doubling = 1;
                         end
                     end
                 end
@@ -107,9 +111,10 @@ module ScalarMul (
                         finished_w = 1;
                     end else begin
                         pointAdd_start = 1;
-                        pointAdd_x2 = pointAdd_x3;
-                        pointAdd_y2 = pointAdd_y3;
-                        pointAdd_z2 = pointAdd_z3;
+                        // pointAdd_x2 = pointAdd_x3;
+                        // pointAdd_y2 = pointAdd_y3;
+                        // pointAdd_z2 = pointAdd_z3;
+                        pointAdd_doubling = 1;
                     end
                 end
             end
