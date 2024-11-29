@@ -10,6 +10,7 @@
 *
 * Review History:
 *     2024.10.02             Yu-Cheng Lin
+*     2024.11.28             Yu-Cheng Lin
 *********************************************************************/
 
 `timescale 1ns/10ps
@@ -66,7 +67,6 @@ module testbench #(
 
     integer input_end, output_end;
     integer i, j, k;
-    integer correct, error;
 
     // Cycle counting
     reg [31:0] cycle_count;   // To count the number of clock cycles
@@ -108,9 +108,11 @@ module testbench #(
     `endif
 `endif
 
+    reg valid_signal;
+
     // IO valid signal
     initial begin
-        in_valid = 1'b0;
+        valid_signal = 1'b0;
 
         // reset
         wait (rst === 1'b1);
@@ -120,16 +122,14 @@ module testbench #(
             @(posedge clk);
             #(`I_DELAY);
 `ifdef RANDOM_IO_HANDSHAKE
-            in_valid = $random() % 2;
+            valid_signal = $random() % 2;
 `else
-            in_valid = 1'b1;
+            valid_signal = 1'b1;
 `endif
         end
-
-        @(posedge clk);
-        #(`I_DELAY);
-        in_valid = 1'b0;
     end
+
+    assign in_valid = valid_signal && (input_end == 0);
 
     // IO valid signal
     initial begin
@@ -149,8 +149,6 @@ module testbench #(
 `endif
         end
 
-        @(posedge clk);
-        #(`I_DELAY);
         out_ready = 1'b0;
     end
     
@@ -165,64 +163,45 @@ module testbench #(
 
         // loop
         for (i = 3 * IO_CYCLE - 1; i >= 0; i = i - 1) begin
-            #(`I_DELAY);
 
             in_data = input_data[DATA_W*i +: DATA_W];
 
             @(posedge clk);
-            while (!(in_valid && in_ready)) begin
+            while (!(in_valid && (in_ready === 1'b1))) begin
                 @(posedge clk);
             end
+            #(`I_DELAY);
         end
         
-        input_end = 1;
-        
         // final
-        #(`I_DELAY);
-        in_data  = 64'bx;
+        input_end = 1;        
+        in_data   = 64'bx;
+        $display("==> Send Input Done...");
+        $display("==> Waiting Calculation...");
     end
 
     // Output
     initial begin
-        correct    = 0;
-        error      = 0;
         output_end = 0;
+        wait (j < 0);
+        output_end = 1;
+        $display("==> Receive Output Done...");
+    end
 
+    initial begin
         // reset
         wait (rst === 1'b1);
         wait (rst === 1'b0);
         
         // loop
-
         j = 2 * IO_CYCLE - 1;
-        while (j >= 0) begin
-            if (out_valid && out_ready) begin
+        while ((j >= 0) && (j < 2 * IO_CYCLE)) begin
+            if ((out_valid === 1'b1) && out_ready) begin
                 output_data[DATA_W*j +: DATA_W] = out_data;
                 j = j - 1;
             end
             @(posedge clk);
         end
-
-        if (output_data === golden_data) begin
-            correct = correct + 1;
-        end
-        else begin
-            error = error + 1;
-            $display("----------------------------------------------");
-            $display(
-                "Scalar:  %h, \nInput:  (%h, %h), \nGolden: (%h, %h), \nYours:  (%h, %h)",
-                input_data[2*PATN_W +: PATN_W],
-                input_data[  PATN_W +: PATN_W],
-                input_data[       0 +: PATN_W],
-                golden_data[  PATN_W +: PATN_W],
-                golden_data[       0 +: PATN_W],
-                output_data[  PATN_W +: PATN_W],
-                output_data[       0 +: PATN_W]
-            );
-        end
-
-        // final
-        output_end = 1;
     end
 
     // count calculation time
@@ -241,11 +220,22 @@ module testbench #(
     initial begin
         wait (input_end && output_end);
 
-        $display("**********************************************");
-        if (error === 0 && correct === 1) begin
+        $display("----------------------------------------------");
+        if (output_data === golden_data) begin
             $display("                 PAT%2d PASS!                 ", pat_num);
         end
         else begin
+            $display(
+                "Scalar:  %h, \nInput:  (%h, %h), \nGolden: (%h, %h), \nYours:  (%h, %h)",
+                input_data[2*PATN_W +: PATN_W],
+                input_data[  PATN_W +: PATN_W],
+                input_data[       0 +: PATN_W],
+                golden_data[  PATN_W +: PATN_W],
+                golden_data[       0 +: PATN_W],
+                output_data[  PATN_W +: PATN_W],
+                output_data[       0 +: PATN_W]
+            );
+            $display("----------------------------------------------");
             $display("                 PAT%2d FAIL!                 ", pat_num);
         end
         $display("----------------------------------------------");
@@ -268,9 +258,11 @@ module clk_gen (
     always #(`PERIOD / 2.0) clk = ~clk;
 
     initial begin
-        clk = 1'b0;
+        $display("**********************************************");
+        clk = 1'b1;
         rst = 1'b0; rst_n = 1'b1; 
         @(posedge clk);
+        #(`I_DELAY);
         rst = 1'b1; rst_n = 1'b0; 
         #(`RST_CYCLE * `PERIOD);
         rst = 1'b0; rst_n = 1'b1; 
