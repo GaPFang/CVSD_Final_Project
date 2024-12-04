@@ -18,7 +18,7 @@ module PointAdd(
     localparam dR = 255'h164115ad394fe29372c9c903de0c43480850c3bbd7e314b9c076c5ff6fa3f4fd;
     localparam R_pow_8 = 255'h3f44c9b21;
     localparam R_pow_4 = 255'h1FD11;
-
+    
     logic finished_r, finished_w;
 
     typedef enum logic [3:0] {

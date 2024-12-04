@@ -63,7 +63,7 @@ module PointAdd(
     logic [254:0] o_montgomery[0:3];
     logic o_montgomery_finished;
 
-    integer 1;
+    integer i, j;
 
     assign o_x3 = x3_r;
     assign o_y3 = y3_r;
@@ -166,9 +166,9 @@ module PointAdd(
         // z1z2z1z2_sub_dx1x2y1y2_w = z1z2z1z2_sub_dx1x2y1y2_r;
         i_montgomery_start_w = 0;
         for(i=0; i<4; i=i+1) begin
-            i_a_r[i] = i_a_w[i];
-            i_b_r[i] = i_b_w[i];
-            tmp_r[i] = tmp_w[i];
+            i_a_w[i] = i_a_r[i];
+            i_b_w[i] = i_b_r[i];
+            tmp_w[i] = tmp_r[i];
         end
         // i_a1_w = 0;
         // i_b1_w = 0;
@@ -199,8 +199,6 @@ module PointAdd(
                         i_montgomery_start_w = 1;
                         i_a_w[0] = i_x1;
                         i_b_w[0] = i_y1;
-                        i_a_w[1] = i_x2;
-                        i_b_w[1] = i_y2;
                     end else begin
                         state_w = S_1;
                         // i_a1_w = i_x1;
@@ -299,7 +297,7 @@ module PointAdd(
                 i_montgomery_start_w = 1;
                 tmp_w[0] = modularSub(tmp_r[3], tmp_r[0]); // E = (x1 + y1)^2 - (A+B)
                 tmp_w[1] = modularSub(tmp_r[1], tmp_r[2]); // F = G-C
-                tmp_w[2] = tmp_r[1] // G
+                tmp_w[2] = tmp_r[1]; // G
                 tmp_w[3] = modularSub(0, tmp_r[0]); // H = -A-B
                 i_a_w[0] = tmp_w[0]; // E*F
                 i_b_w[0] = tmp_w[1];
@@ -340,8 +338,6 @@ module PointAdd(
                     i_montgomery_start_w = 1;
                     i_a_w[0] = o_montgomery[0]; // x1y1
                     i_b_w[0] = R_pow_2;
-                    i_a_w[1] = o_montgomery[1]; // x2y2
-                    i_b_w[1] = R_pow_2;
                 end
             end
             S_12: begin
@@ -349,7 +345,6 @@ module PointAdd(
                     state_w = S_IDLE;
                     finished_w = 1;
                     t1_w = o_montgomery[0];
-                    t2_w = o_montgomery[1];
                 end
             end
         endcase
@@ -385,10 +380,10 @@ module PointAdd(
             // z1z2z1z2_add_dx1x2y1y2_r <= 0;
             // z1z2z1z2_sub_dx1x2y1y2_r <= 0;
             i_montgomery_start_r <= 0;
-            for(i=0; i<4; i=i+1) begin
-                i_a_r[i] <= 0;
-                i_b_r[i] <= 0;
-                tmp_r[i] <= 0;
+            for(j=0; j<4; j=j+1) begin
+                i_a_r[j] <= 0;
+                i_b_r[j] <= 0;
+                tmp_r[j] <= 0;
             end
             finished_r <= 0;
         end else begin
@@ -420,10 +415,10 @@ module PointAdd(
             // z1z2z1z2_add_dx1x2y1y2_r <= z1z2z1z2_add_dx1x2y1y2_w;
             // z1z2z1z2_sub_dx1x2y1y2_r <= z1z2z1z2_sub_dx1x2y1y2_w;
             i_montgomery_start_r <= i_montgomery_start_w;
-            for(i=0; i<4; i=i+1) begin
-                i_a_r[i] <= i_a_w[i];
-                i_b_r[i] <= i_b_w[i];
-                tmp_r[i] <= tmp_w[i];
+            for(j=0; j<4; j=j+1) begin
+                i_a_r[j] <= i_a_w[j];
+                i_b_r[j] <= i_b_w[j];
+                tmp_r[j] <= tmp_w[j];
             end
             finished_r <= finished_w;
         end
