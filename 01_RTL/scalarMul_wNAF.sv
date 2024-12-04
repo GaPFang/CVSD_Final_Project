@@ -13,6 +13,7 @@ module ScalarMul (
 
     typedef enum logic [2:0] {
         S_IDLE,
+        S_CALC_T,               // T = XY/Z, Z = 1
         S_DOUBLE,               // P_double = P + P
         S_NAF_AND_PRECOMPUTE,   // r = NAF(M), precompute Ps
         S_6,                    // r = r + r
@@ -66,7 +67,7 @@ module ScalarMul (
         .o_finished(pointAdd_finished)
     );
 
-    integer i;
+    integer i, j;
 
     always_comb begin
         state_w = state_r;
@@ -234,13 +235,13 @@ module ScalarMul (
             P_double_x_r <= 0;
             P_double_y_r <= 0;
             P_double_z_r <= 0;
-            for (i = 0; i < two_pow_wMinus1; i = i + 1) begin
-                Ps_x_r[i] = 0;
-                Ps_y_r[i] = 0;
-                Ps_z_r[i] = 0;
+            for (j = 0; j < two_pow_wMinus1; j = j + 1) begin
+                Ps_x_r[j] = 0;
+                Ps_y_r[j] = 0;
+                Ps_z_r[j] = 0;
             end
-            for (i = 0; i < 255; i = i + 1) begin
-                NAF_r[i] = 0;
+            for (j = 0; j < 255; j = j + 1) begin
+                NAF_r[j] = 0;
             end
         end else begin
             state_r <= state_w;
@@ -254,13 +255,13 @@ module ScalarMul (
             P_double_x_r <= P_double_x_w;
             P_double_y_r <= P_double_y_w;
             P_double_z_r <= P_double_z_w;
-            for (i = 0; i < two_pow_wMinus1; i = i + 1) begin
-                Ps_x_r[i] = Ps_x_w[i];
-                Ps_y_r[i] = Ps_y_w[i];
-                Ps_z_r[i] = Ps_z_w[i];
+            for (j = 0; j < two_pow_wMinus1; j = j + 1) begin
+                Ps_x_r[j] = Ps_x_w[j];
+                Ps_y_r[j] = Ps_y_w[j];
+                Ps_z_r[j] = Ps_z_w[j];
             end
-            for (i = 0; i < 255; i = i + 1) begin
-                NAF_r[i] = NAF_w[i];
+            for (j = 0; j < 255; j = j + 1) begin
+                NAF_r[j] = NAF_w[j];
             end
         end
     end
