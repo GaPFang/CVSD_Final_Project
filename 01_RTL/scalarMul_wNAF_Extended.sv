@@ -13,7 +13,7 @@ module ScalarMul (
 
     typedef enum logic [2:0] {
         S_IDLE,
-        S_CALC_T,               // T = XY/Z, Z = 1
+        S_CALC_T,               // T = XY/Z, Z = 1 -> T = XY
         S_DOUBLE,               // P_double = P + P
         S_NAF_AND_PRECOMPUTE,   // r = NAF(M), precompute Ps
         S_6,                    // r = r + r
@@ -24,7 +24,7 @@ module ScalarMul (
     localparam two_pow_w = 1 << w;
     localparam two_pow_wMinus1 = 1 << (w-1);
     localparam two_pow_wMinus2 = 1 << (w-2);
-    localparam N = 57896044618658097711785492504343953926634992332820282019728792003956564819949;
+    localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
 
     state_t state_r, state_w;
     logic [254:0] M_r, M_w;
@@ -92,6 +92,7 @@ module ScalarMul (
         pointAdd_x2 = 0;
         pointAdd_y2 = 0;
         pointAdd_z2 = 0;
+        pointAdd_t2 = 0;
         P_double_x_w = P_double_x_r;
         P_double_y_w = P_double_y_r;
         P_double_z_w = P_double_z_r;
@@ -131,10 +132,10 @@ module ScalarMul (
             end
             S_CALC_T: begin
                 if (pointAdd_finished) begin
-                    pointAdd_doubling = 1;
                     state_w = S_DOUBLE;
                     Ps_t_w[0] = pointAdd_t3;
-                    
+                    pointAdd_doubling = 1;
+                    pointAdd_start = 1;
                 end
             end
             S_DOUBLE: begin
@@ -146,11 +147,11 @@ module ScalarMul (
                     precompute_cnt_w = 1;
                     state_w = S_NAF_AND_PRECOMPUTE;
                     pointAdd_start = 1;
-                    pointAdd_x1 = Ps_x_r[0];
+                    pointAdd_x1 = Ps_x_r[0];    // original x, y, z, t
                     pointAdd_y1 = Ps_y_r[0];
                     pointAdd_z1 = Ps_z_r[0];
                     pointAdd_t1 = Ps_t_r[0];
-                    pointAdd_x2 = pointAdd_x3;
+                    pointAdd_x2 = pointAdd_x3;      // P_double
                     pointAdd_y2 = pointAdd_y3;
                     pointAdd_z2 = pointAdd_z3;
                     pointAdd_t2 = pointAdd_t3;
@@ -160,7 +161,7 @@ module ScalarMul (
             end
             S_NAF_AND_PRECOMPUTE: begin
                 if (pointAdd_finished) begin
-                    Ps_x_w[precompute_cnt_r] = pointAdd_x3;
+                    Ps_x_w[precompute_cnt_r] = pointAdd_x3;     // 3P  
                     Ps_y_w[precompute_cnt_r] = pointAdd_y3;
                     Ps_z_w[precompute_cnt_r] = pointAdd_z3;
                     Ps_t_w[precompute_cnt_r] = pointAdd_t3;
@@ -217,7 +218,7 @@ module ScalarMul (
                             pointAdd_x2 = Ps_x_r[~naf];
                             pointAdd_y2 = N - Ps_y_r[~naf];
                             pointAdd_z2 = Ps_z_r[~naf];
-                            pointAdd_t2 = Ps_t_r[~naf];
+                            pointAdd_t2 = N - Ps_t_r[~naf];
                         end else begin
                             pointAdd_x2 = Ps_x_r[naf];
                             pointAdd_y2 = Ps_y_r[naf];

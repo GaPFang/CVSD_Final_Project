@@ -160,6 +160,7 @@ module PointAdd(
         x3_w = x3_r;
         y3_w = y3_r;
         z3_w = z3_r;
+        t3_w = t3_r;
         // x1y2_x2y1_w = x1y2_x2y1_r;
         // x1x2_y1y2_w = x1x2_y1y2_r;
         // z1z2z1z2_add_dx1x2y1y2_w = z1z2z1z2_add_dx1x2y1y2_r;
@@ -195,10 +196,13 @@ module PointAdd(
                         // i_a2_w = i_y1;
                         // i_b2_w = i_y1;
                     end else if(i_initial) begin    // calculate t = xy/z, z = 1 -> t = xy
-                        state_w = S_1;
+                        state_w = S_11;
                         i_montgomery_start_w = 1;
                         i_a_w[0] = i_x1;
                         i_b_w[0] = i_y1;
+                        x3_w = i_x1;
+                        y3_w = i_y1;
+                        z3_w = 1;
                     end else begin
                         state_w = S_1;
                         // i_a1_w = i_x1;
@@ -344,7 +348,7 @@ module PointAdd(
                 if(o_montgomery_finished) begin
                     state_w = S_IDLE;
                     finished_w = 1;
-                    t1_w = o_montgomery[0];
+                    t3_w = o_montgomery[0];
                 end
             end
         endcase
