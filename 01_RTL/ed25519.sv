@@ -80,7 +80,7 @@ module ed25519 (
                 if (i_in_valid & o_in_ready) begin
                     in_data_w[767-(64*cnt_r) -: 64] = i_in_data;
                     cnt_w = cnt_r + 1;
-                    if (cnt_r == 12) begin
+                    if (cnt_r == 11) begin
                         cnt_w = 4'b0;
                         state_w = S_WAIT_MUL;
                         scalarMul_start_w = 1;
