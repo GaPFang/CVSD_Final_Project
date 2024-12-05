@@ -24,7 +24,7 @@ module ScalarMul (
     localparam two_pow_w = 1 << w;
     localparam two_pow_wMinus1 = 1 << (w-1);
     localparam two_pow_wMinus2 = 1 << (w-2);
-    localparam N = 57896044618658097711785492504343953926634992332820282019728792003956564819949;
+    localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
 
     state_t state_r, state_w;
     logic [254:0] M_r, M_w;
@@ -236,12 +236,12 @@ module ScalarMul (
             P_double_y_r <= 0;
             P_double_z_r <= 0;
             for (j = 0; j < two_pow_wMinus1; j = j + 1) begin
-                Ps_x_r[j] = 0;
-                Ps_y_r[j] = 0;
-                Ps_z_r[j] = 0;
+                Ps_x_r[j] <= 0;
+                Ps_y_r[j] <= 0;
+                Ps_z_r[j] <= 0;
             end
             for (j = 0; j < 255; j = j + 1) begin
-                NAF_r[j] = 0;
+                NAF_r[j] <= 0;
             end
         end else begin
             state_r <= state_w;
@@ -256,12 +256,12 @@ module ScalarMul (
             P_double_y_r <= P_double_y_w;
             P_double_z_r <= P_double_z_w;
             for (j = 0; j < two_pow_wMinus1; j = j + 1) begin
-                Ps_x_r[j] = Ps_x_w[j];
-                Ps_y_r[j] = Ps_y_w[j];
-                Ps_z_r[j] = Ps_z_w[j];
+                Ps_x_r[j] <= Ps_x_w[j];
+                Ps_y_r[j] <= Ps_y_w[j];
+                Ps_z_r[j] <= Ps_z_w[j];
             end
             for (j = 0; j < 255; j = j + 1) begin
-                NAF_r[j] = NAF_w[j];
+                NAF_r[j] <= NAF_w[j];
             end
         end
     end
