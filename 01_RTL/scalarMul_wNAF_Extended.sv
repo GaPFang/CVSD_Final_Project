@@ -133,6 +133,9 @@ module ScalarMul (
             S_CALC_T: begin
                 if (pointAdd_finished) begin
                     state_w = S_DOUBLE;
+                    Ps_x_w[0] = pointAdd_x3;
+                    Ps_y_w[0] = pointAdd_y3;
+                    Ps_z_w[0] = pointAdd_z3;
                     Ps_t_w[0] = pointAdd_t3;
                     pointAdd_doubling = 1;
                     pointAdd_start = 1;
