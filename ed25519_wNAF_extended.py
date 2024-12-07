@@ -76,7 +76,7 @@ class number:
 				else:
 					Rrs *= 2
 		Lrs -= Rrs
-		if ((Lrs > 0)):
+		if (Lrs < 0):
 			Lrs += q
 		while (k != 255):
 			k -= 1
@@ -88,8 +88,8 @@ class number:
 			
 
 	def __truediv__(self, other: 'number') -> 'number': # mod div: value1 / value2 mod q
-		inv = number(self.MM(other.value, R*R%q)).inverse().value
-		return self * number(inv)
+		inv = other.inverse()
+		return number(self.MM(self.value, inv.value))
 
 	def __neg__(self) -> 'number':
 		return number(q-self.value)
@@ -205,9 +205,9 @@ if __name__ == "__main__":
 	# y = number(0x116943db82ba4a31f240994b14a091fb55cc6edd19658a06d5f4c5805730c232)
 	
 	#testcase 3
-	#scalar_M = 0x1759edc372ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c3d15eef7
-	#x = number(0x5b90ea17eaf962ef96588677a54b09c016ad982c842efa107c078796f88449a8)
-	#y = number(0x6a210d43f514ec3c7a8e677567ad835b5c2e4bc5dd3480e135708e41b42c0ac6)
+	# scalar_M = 0x1759edc372ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c3d15eef7
+	# x = number(0x5b90ea17eaf962ef96588677a54b09c016ad982c842efa107c078796f88449a8)
+	# y = number(0x6a210d43f514ec3c7a8e677567ad835b5c2e4bc5dd3480e135708e41b42c0ac6)
 
 	point_P = point(x, y)
 	point_G = (point_P * scalar_M).reduce()

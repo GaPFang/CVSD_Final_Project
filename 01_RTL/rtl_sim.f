@@ -31,10 +31,11 @@
 // Your Design Files
 // -----------------------------------------------------------------------------
 ./ed25519.sv
-./scalarMul_wNAF.sv
-./pointAdd.sv
+./scalarMul_wNAF_Extended.sv
+./pointAddExtended.sv
 ./montgomery.sv
 ./reduction.sv
+./montgomeryInv.sv
 
 // Define Flags
 // -----------------------------------------------------------------------------
