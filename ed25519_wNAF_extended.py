@@ -44,18 +44,52 @@ class number:
 		r = self.MM(r,other.value)
 		assert r == ((self.value * other.value) % q)
 		return number(r)
+	
+	def inverse(self) -> 'number': # mod inv: value^(-1) mod q
+		x = self.value
+		k = 0
+		Luv = 2*x
+		Ruv = q
+		Lrs = 1
+		Rrs = 0
+		while True:
+			SLuv = (Luv < 0)
+			SRuv = (Ruv < 0)
+			hLuv = Luv >> 1
+			k += 1
+			if hLuv & 1 == 0:
+				if (SLuv == (Luv > 0)):
+					k -= 1
+					break
+				Luv = hLuv
+				Rrs *= 2
+			else:
+				tmprs = Lrs
+				Lrs = Lrs + Rrs
+				if (SLuv ^ SRuv):
+					Luv = hLuv + Ruv
+				else:
+					Luv = hLuv - Ruv
+				if ((1 ^ SLuv) == (Luv < 0)):
+					Ruv = hLuv
+					Rrs = tmprs * 2
+				else:
+					Rrs *= 2
+		Lrs -= Rrs
+		if (Lrs < 0):
+			Lrs += q
+		while (k != 255):
+			k -= 1
+			if (Lrs & 1 == 0):
+				Lrs = Lrs >> 1
+			else:
+				Lrs = (Lrs + q) >> 1
+		return number(Lrs)
+			
 
 	def __truediv__(self, other: 'number') -> 'number': # mod div: value1 / value2 mod q
-		#calculate value2 ^ (p-2) mod p
-		q_minus_2_in_bin = "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101011"
-		r = number(1)
-		for i in range(255):
-			r = r*r
-			if(q_minus_2_in_bin[i]=="1"):
-				r = r*other
-		#calculate value1/value2 mod p
-		r = self*r
-		return r
+		inv = other.inverse()
+		return number(self.MM(self.value, inv.value))
 
 	def __neg__(self) -> 'number':
 		return number(q-self.value)
@@ -66,34 +100,15 @@ class number:
 
 d = number(0x52036cee2b6ffe738cc740797779e89800700a4d4141d8ab75eb4dca135978a3)
 class point:
-	def __init__(self, number_X: number, number_Y: number, number_Z: number = number(1)):
+	def __init__(self, number_X: number, number_Y: number, number_Z: number = number(1), number_T: number | None = None):
 		self.X = number_X
 		self.Y = number_Y
 		self.Z = number_Z
-		self.T = number_X*number_Y/self.Z
+		self.T = number_T if number_T is not None else number_X*number_Y
 
 	def __neg__(self) -> 'point':
-		return point(self.X, -self.Y, self.Z)
+		return point(self.X, -self.Y, self.Z, -self.T)
 
-	# def __add__(self, other: 'point') -> 'point':
-	# 	A = (self.Y-self.X)*(other.Y-other.X)
-	# 	B = (self.Y+self.X)*(other.Y+other.X)
-	# 	C = self.T*number(2)*d*other.T
-	# 	D = self.Z*number(2)*other.Z
-	# 	E = B-A
-	# 	F = D-C
-	# 	G = D+C
-	# 	H = B+A
-	# 	X3 = E*F
-	# 	Y3 = G*H
-	# 	T3 = E*H
-	# 	Z3 = F*G
-	# 	# Z1Z2 = self.Z*other.Z
-	# 	# X1X2Y1Y2 = self.X*other.X*self.Y*other.Y
-	# 	# X3 = Z1Z2*(self.X*other.Y+other.X*self.Y)*(Z1Z2*Z1Z2-d*X1X2Y1Y2)
-	# 	# Y3 = Z1Z2*(self.Y*other.Y+self.X*other.X)*(Z1Z2*Z1Z2+d*X1X2Y1Y2)
-	# 	# Z3 = (Z1Z2*Z1Z2-d*X1X2Y1Y2)*(Z1Z2*Z1Z2+d*X1X2Y1Y2)
-	# 	return point(X3,Y3,Z3)
 	def __add__(self, other: 'point') -> 'point':
 		A = (self.Y-self.X)*(other.Y+other.X)
 		B = (self.Y+self.X)*(other.Y-other.X)
@@ -107,17 +122,9 @@ class point:
 		Y3 = G*H
 		T3 = E*H
 		Z3 = F*G
-		# Z1Z2 = self.Z*other.Z
-		# X1X2Y1Y2 = self.X*other.X*self.Y*other.Y
-		# X3 = Z1Z2*(self.X*other.Y+other.X*self.Y)*(Z1Z2*Z1Z2-d*X1X2Y1Y2)
-		# Y3 = Z1Z2*(self.Y*other.Y+self.X*other.X)*(Z1Z2*Z1Z2+d*X1X2Y1Y2)
-		# Z3 = (Z1Z2*Z1Z2-d*X1X2Y1Y2)*(Z1Z2*Z1Z2+d*X1X2Y1Y2)
-		return point(X3,Y3,Z3)
+		return point(X3,Y3,Z3,T3)
 	
 	def double(self) -> 'point':
-		# X3 = number(2)*self.X*self.Y*(number(2)*self.Z*self.Z-(self.Y*self.Y-self.X*self.X))
-		# Y3 = (self.Y*self.Y-self.X*self.X)*(self.X*self.X+self.Y*self.Y)
-		# Z3 = (self.Y*self.Y-self.X*self.X)*(number(2)*self.Z*self.Z-(self.Y*self.Y-self.X*self.X))
 		A = self.X*self.X
 		B = self.Y*self.Y
 		C = number(2)*self.Z*self.Z
@@ -130,10 +137,7 @@ class point:
 		Y3 = G*H
 		T3 = E*H
 		Z3 = F*G
-		return point(X3,Y3,Z3)
-
-	
-		
+		return point(X3,Y3,Z3,T3)
 
 	def __mul__(self, M: int) -> 'point':
 		w = 3
@@ -191,19 +195,19 @@ def toNAF(x, w):
 
 if __name__ == "__main__":
 	#testcase 1
-	# scalar_M = 0x259f4329e6f4590b9a164106cf6a659eb4862b21fb97d43588561712e8e5216a
-	# x = number(0x0fa4d2a95dafe3275eaf3ba907dbb1da819aba3927450d7399a270ce660d2fae)
-	# y = number(0x2f0fe2678dedf6671e055f1a557233b324f44fb8be4afe607e5541eb11b0bea2)
+	scalar_M = 0x259f4329e6f4590b9a164106cf6a659eb4862b21fb97d43588561712e8e5216a
+	x = number(0x0fa4d2a95dafe3275eaf3ba907dbb1da819aba3927450d7399a270ce660d2fae)
+	y = number(0x2f0fe2678dedf6671e055f1a557233b324f44fb8be4afe607e5541eb11b0bea2)
 
 	#testcase 2
-	scalar_M = 0x17e0aa3c03983ca8ea7e9d498c778ea6eb2083e6ce164dba0ff18e0242af9fc3
-	x = number(0x2e2c9fbf00b87ab7cde15119d1c5b09aa9743b5c6fb96ec59dbf2f30209b133c)
-	y = number(0x116943db82ba4a31f240994b14a091fb55cc6edd19658a06d5f4c5805730c232)
+	# scalar_M = 0x17e0aa3c03983ca8ea7e9d498c778ea6eb2083e6ce164dba0ff18e0242af9fc3
+	# x = number(0x2e2c9fbf00b87ab7cde15119d1c5b09aa9743b5c6fb96ec59dbf2f30209b133c)
+	# y = number(0x116943db82ba4a31f240994b14a091fb55cc6edd19658a06d5f4c5805730c232)
 	
 	#testcase 3
-	#scalar_M = 0x1759edc372ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c3d15eef7
-	#x = number(0x5b90ea17eaf962ef96588677a54b09c016ad982c842efa107c078796f88449a8)
-	#y = number(0x6a210d43f514ec3c7a8e677567ad835b5c2e4bc5dd3480e135708e41b42c0ac6)
+	# scalar_M = 0x1759edc372ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c3d15eef7
+	# x = number(0x5b90ea17eaf962ef96588677a54b09c016ad982c842efa107c078796f88449a8)
+	# y = number(0x6a210d43f514ec3c7a8e677567ad835b5c2e4bc5dd3480e135708e41b42c0ac6)
 
 	point_P = point(x, y)
 	point_G = (point_P * scalar_M).reduce()
