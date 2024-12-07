@@ -25,16 +25,16 @@ module ed25519 (
     logic [767:0] in_data_r, in_data_w;
     logic [3:0] cnt_r, cnt_w;
 
-    wire [255:0] M = in_data_r[767:512];
-    wire [255:0] xp = in_data_r[511:256];
-    wire [255:0] yp = in_data_r[255:0];
-    wire [255:0] zp = in_data_r[767:512];
+    wire [254:0] M = in_data_r[766:512];
+    wire [254:0] xp = in_data_r[510:256];
+    wire [254:0] yp = in_data_r[254:0];
+    wire [254:0] zp = in_data_r[766:512];
 
     logic scalarMul_start_r, scalarMul_start_w, scalarMul_finished;
-    logic [255:0] scalarMul_x, scalarMul_y, scalarMul_z;
+    wire [254:0] scalarMul_x, scalarMul_y, scalarMul_z;
 
     logic reduction_start_r, reduction_start_w, reduction_finished;
-    logic [255:0] reduction_x, reduction_y;
+    wire [254:0] reduction_x, reduction_y;
 
     assign o_in_ready = in_ready_r;
     assign o_out_valid = out_valid_r;
@@ -91,16 +91,16 @@ module ed25519 (
                 if (scalarMul_finished) begin
                     state_w = S_WAIT_RED;
                     reduction_start_w = 1;
-                    in_data_w[767:512] = scalarMul_z;
-                    in_data_w[511:256] = scalarMul_x;
-                    in_data_w[255:0] = scalarMul_y;
+                    in_data_w[766:512] = scalarMul_z;
+                    in_data_w[510:256] = scalarMul_x;
+                    in_data_w[254:0] = scalarMul_y;
                 end
             end
             S_WAIT_RED: begin
                 if (reduction_finished) begin
                     state_w = S_OUTPUT;
-                    in_data_w[511:256] = reduction_x;
-                    in_data_w[255:0] = reduction_y;
+                    in_data_w[510:256] = reduction_x;
+                    in_data_w[254:0] = reduction_y;
                 end
             end
             S_OUTPUT: begin
