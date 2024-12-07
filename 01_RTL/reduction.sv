@@ -12,13 +12,12 @@ module Reduction (
     localparam q = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
 
     logic [254:0] zR_r, zR_w;
-    logic [254:0] r_r, r_w;
     logic [254:0] x_r, x_w, y_r, y_w;
-    logic [7:0] cnt_r, cnt_w;
     logic finished_r, finished_w;
 
-    logic montgomery_start, montgomery_finished;
-    logic [254:0] o_montgomery;
+    logic montgomery_start, montgomeryInv_start;
+    wire montgomery_finished, montgomeryInv_finished;
+    logic [254:0] o_montgomery, o_montgomeryInv;
     logic [254:0] montgomery_a, montgomery_b;
 
     assign o_x = x_r;
@@ -27,8 +26,7 @@ module Reduction (
 
     typedef enum logic [2:0] {
         S_1,    // zR = MM(p, R^2)
-        S_2,    // r  = MM(r, r)
-        S_3,    // r  = MM(r, zR)
+        S_2,    // r  = MM_inv(r)
         S_4,    // r  = MM(r, R^(2^255+1))
         S_DIV_X,
         S_DIV_Y,
@@ -47,12 +45,19 @@ module Reduction (
         .o_finished(montgomery_finished)
     );
 
+    MontgomeryInv montgomeryInv (
+        .i_clk(i_clk),
+        .i_rst(i_rst),
+        .i_start(montgomeryInv_start),
+        .i_x(montgomery_a),
+        .o_montgomeryInv(o_montgomeryInv),
+        .o_finished(montgomeryInv_finished)
+    );
+
     always_comb begin
         zR_w = zR_r;
-        r_w = r_r;
         x_w = x_r;
         y_w = y_r;
-        cnt_w = cnt_r;
         state_w = state_r;
         finished_w = 0;
         montgomery_start = 0;
@@ -66,60 +71,22 @@ module Reduction (
                     y_w = i_y;
                     montgomery_a = i_z;
                     montgomery_b = R_2;
-                    r_w = 1;
+                    zR_w = 1;
                 end
                 if (montgomery_finished) begin
                     zR_w = o_montgomery;
                     state_w = S_2;
-                    cnt_w = 254;
-                    montgomery_start = 1;
-                    montgomery_a = r_w;
-                    montgomery_b = r_w;
+                    montgomeryInv_start = 1;
+                    montgomery_a = o_montgomery;
                 end
             end
             S_2: begin
                 if (montgomery_finished) begin
-                    r_w = o_montgomery;
-                    if (q_minus_2[cnt_r]) begin
-                        state_w = S_3;
-                        montgomery_start = 1;
-                        montgomery_a = r_w;
-                        montgomery_b = zR_w;
-                    end else begin
-                        cnt_w = cnt_r - 1;
-                        montgomery_start = 1;
-                        montgomery_a = r_w;
-                        if (cnt_r == 0) begin
-                            state_w = S_4;
-                            montgomery_b = R_2_255;
-                        end else begin
-                            montgomery_b = r_w;
-                        end
-                    end
-                end
-            end
-            S_3: begin
-                if (montgomery_finished) begin
-                    r_w = o_montgomery;
-                    state_w = S_2;
-                    cnt_w = cnt_r - 1;
+                    zR_w = o_montgomery;
                     montgomery_start = 1;
-                    montgomery_a = r_w;
-                    if (cnt_r == 0) begin
-                        state_w = S_4;
-                        montgomery_b = R_2_255;
-                    end else begin
-                        montgomery_b = r_w;
-                    end
-                end
-            end
-            S_4: begin
-                if (montgomery_finished) begin
-                    r_w = o_montgomery;
                     state_w = S_DIV_X;
-                    montgomery_start = 1;
                     montgomery_a = x_r;
-                    montgomery_b = r_w;
+                    montgomery_b = o_montgomery;
                 end
             end
             S_DIV_X: begin
@@ -128,7 +95,7 @@ module Reduction (
                     state_w = S_DIV_Y;
                     montgomery_start = 1;
                     montgomery_a = y_r;
-                    montgomery_b = r_w;
+                    montgomery_b = zR_r;
                 end
             end
             S_DIV_Y: begin
@@ -154,18 +121,14 @@ module Reduction (
         if (i_rst) begin
             state_r <= S_1;
             zR_r <= 0;
-            r_r <= 0;
             x_r <= 0;
             y_r <= 0;
-            cnt_r <= 0;
             finished_r <= 0;
         end else begin
             state_r <= state_w;
             zR_r <= zR_w;
-            r_r <= r_w;
             x_r <= x_w;
             y_r <= y_w;
-            cnt_r <= cnt_w;
             finished_r <= finished_w;
         end
     end
