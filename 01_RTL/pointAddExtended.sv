@@ -27,7 +27,7 @@ module PointAdd(
     
     logic finished_r, finished_w;
 
-    typedef enum logic [3:0] {
+    typedef enum logic [2:0] {
         S_IDLE,
         S_1,
         S_2,
@@ -35,15 +35,15 @@ module PointAdd(
         S_4,
         S_5,
         S_6,
-        S_7,
-        S_8,
-        S_9,
-        S_10,
-        S_11,
-        S_12,
-        S_13,
-        S_14,
-        S_15
+        S_7
+        // S_8,
+        // S_9,
+        // S_10,
+        // S_11,
+        // S_12,
+        // S_13,
+        // S_14,
+        // S_15
     } state_t;
 
     state_t state_r, state_w;
@@ -191,27 +191,24 @@ module PointAdd(
                     z2_w = i_z2;
                     t2_w = i_t2;
                     if (i_doubling) begin
-                        state_w = S_6;
-                        // i_a1_w = i_x1;
-                        // i_b1_w = i_x1;
-                        // i_a2_w = i_y1;
-                        // i_b2_w = i_y1;
+                        state_w = S_5;
                     end else if(i_initial) begin    // calculate XR, YR
-                        state_w = S_11;
+                        state_w = S_4;
                         i_montgomery_start_w = 1;
                         i_a_w[0] = i_x1;
-                        i_b_w[0] = i_y1;
-                        // i_a_w[1] = i_y1;
-                        // i_b_w[1] = R_pow_2;
+                        i_b_w[0] = 1;
+                        i_a_w[1] = i_y1;
+                        i_b_w[1] = 1;
+                        i_a_w[2] = i_x1;
+                        i_b_w[2] = i_y1;
+                        i_a_w[3] = 1;
+                        i_b_w[3] = 1;
                         x3_w = i_x1;
                         y3_w = i_y1;
                         z3_w = 1;
                     end else begin
                         state_w = S_1;
-                        // i_a1_w = i_x1;
-                        // i_b1_w = i_y2;
-                        // i_a2_w = i_x2;
-                        // i_b2_w = i_y1;
+
                     end
                 end
             end
@@ -240,8 +237,6 @@ module PointAdd(
             S_3: begin
                 tmp_w[0] = modularAdd(tmp_r[0], tmp_r[0]);  // 2 * E
                 tmp_w[1] = modularAdd(tmp_r[1], tmp_r[1]);  // 2 * H
-                // tmp_w[2] = tmp_r[2];
-                // tmp_w[3] = tmp_r[3];
                 state_w = S_4;
                 i_montgomery_start_w = 1;
                 i_a_w[0] = tmp_w[0];    // E*F -> x3
@@ -255,16 +250,6 @@ module PointAdd(
             end
             S_4: begin
                 if (o_montgomery_finished) begin
-                    // state_w = S_5;
-                    // i_montgomery_start_w = 1;
-                    // i_a_w[0] = o_montgomery[0]; // x3
-                    // i_b_w[0] = R_pow_4;
-                    // i_a_w[1] = o_montgomery[1]; // y3
-                    // i_b_w[1] = R_pow_4;
-                    // i_a_w[2] = o_montgomery[2]; // t3
-                    // i_b_w[2] = R_pow_4;
-                    // i_a_w[3] = o_montgomery[3]; // z3
-                    // i_b_w[3] = R_pow_4;
                     state_w = S_IDLE;
                     finished_w = 1;
                     x3_w = o_montgomery[0];
@@ -273,18 +258,8 @@ module PointAdd(
                     z3_w = o_montgomery[3];
                 end
             end
-            S_5: begin  // Todo This cycle could be removed
-                if (o_montgomery_finished) begin
-                    state_w = S_IDLE;
-                    finished_w = 1;
-                    x3_w = o_montgomery[0];
-                    y3_w = o_montgomery[1];
-                    t3_w = o_montgomery[2];
-                    z3_w = o_montgomery[3];
-                end
-            end
-            S_6: begin
-                state_w = S_7;
+            S_5: begin
+                state_w = S_6;
                 i_montgomery_start_w = 1;
                 tmp_w[0] = modularAdd(x1_r, y1_r); // x1 + y1
                 i_a_w[0] = x1_r;    // x1^2 (A)
@@ -296,17 +271,17 @@ module PointAdd(
                 i_a_w[3] = tmp_w[0];    // (x1 + y1)^2
                 i_b_w[3] = tmp_w[0];
             end
-            S_7: begin
+            S_6: begin
                 if (o_montgomery_finished) begin
-                    state_w = S_8;
+                    state_w = S_7;
                     tmp_w[0] = modularAdd(o_montgomery[1], o_montgomery[0]); // y1^2 + x1^2 (A+B)
                     tmp_w[1] = modularSub(o_montgomery[1], o_montgomery[0]); // y1^2 - x1^2 (G)
                     tmp_w[2] = modularAdd(o_montgomery[2], o_montgomery[2]); // 2 * z1^2 (C)
                     tmp_w[3] = o_montgomery[3]; // (x1 + y1)^2
                 end
             end
-            S_8: begin
-                state_w = S_9;
+            S_7: begin
+                state_w = S_4;
                 i_montgomery_start_w = 1;
                 tmp_w[0] = modularSub(tmp_r[3], tmp_r[0]); // E = (x1 + y1)^2 - (A+B)
                 tmp_w[1] = modularSub(tmp_r[1], tmp_r[2]); // F = G-C
@@ -321,55 +296,7 @@ module PointAdd(
                 i_a_w[3] = tmp_w[1]; // F*G
                 i_b_w[3] = tmp_w[2];
             end
-            S_9: begin
-                if (o_montgomery_finished) begin
-                    // state_w = S_10;
-                    // i_montgomery_start_w = 1;
-                    // i_a_w[0] = o_montgomery[0]; // x3
-                    // i_b_w[0] = R_pow_4;
-                    // i_a_w[1] = o_montgomery[1]; // y3
-                    // i_b_w[1] = R_pow_4;
-                    // i_a_w[2] = o_montgomery[2]; // t3
-                    // i_b_w[2] = R_pow_4;
-                    // i_a_w[3] = o_montgomery[3]; // z3
-                    // i_b_w[3] = R_pow_4;
-                    state_w = S_IDLE;
-                    finished_w = 1;
-                    x3_w = o_montgomery[0];
-                    y3_w = o_montgomery[1];
-                    t3_w = o_montgomery[2];
-                    z3_w = o_montgomery[3];
-                end
-            end
-            S_10: begin
-                if (o_montgomery_finished) begin
-                    state_w = S_IDLE;
-                    finished_w = 1;
-                    x3_w = o_montgomery[0];
-                    y3_w = o_montgomery[1];
-                    t3_w = o_montgomery[2];
-                    z3_w = o_montgomery[3];
-                end
-            end
-            S_11: begin
-                if(o_montgomery_finished) begin // calculate t = xy/z, z = R, x=XR, y=YR -> t = xRyR/R = XYR
-                    state_w = S_IDLE;
-                    finished_w = 1;
-                    // i_montgomery_start_w = 1;
-                    // i_a_w[0] = o_montgomery[0]; // XR
-                    // i_b_w[0] = o_montgomery[1]; // YR
-                    // x3_w = o_montgomery[0];
-                    // y3_w = o_montgomery[1];
-                    t3_w = o_montgomery[0];
-                end
-            end
-            S_12: begin
-                if(o_montgomery_finished) begin
-                    state_w = S_IDLE;
-                    finished_w = 1;
-                    t3_w = o_montgomery[0]; // TR
-                end
-            end
+
         endcase
     end
 
