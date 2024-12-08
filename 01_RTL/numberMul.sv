@@ -18,14 +18,14 @@ module numberMul (
   localparam cycles = 255;
   localparam cycles1_3 = 85;
   localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
-  localparam [15:0] LUT1 [0:31] = '{16'h0, 16'h98, 16'h130, 16'h1C8, 16'h260, 16'h2F8, 16'h390, 16'h428, 16'h4C0, 16'h558, 16'h5F0, 16'h688, 16'h720, 16'h7B8, 16'h850, 16'h8E8, 16'h980, 16'hA18, 16'hAB0, 16'hB48, 16'hBE0, 16'hC78, 16'hD10, 16'hDA8, 16'hE40, 16'hED8, 16'hF70, 16'h1008, 16'h10A0, 16'h1138, 16'h11D0, 16'h1268};
+  localparam [15:0] LUT1 [0:63] = '{16'h0, 16'h98, 16'h130, 16'h1C8, 16'h260, 16'h2F8, 16'h390, 16'h428, 16'h4C0, 16'h558, 16'h5F0, 16'h688, 16'h720, 16'h7B8, 16'h850, 16'h8E8, 16'h980, 16'hA18, 16'hAB0, 16'hB48, 16'hBE0, 16'hC78, 16'hD10, 16'hDA8, 16'hE40, 16'hED8, 16'hF70, 16'h1008, 16'h10A0, 16'h1138, 16'h11D0, 16'h1268, 16'h1300, 16'h1398, 16'h1430, 16'h14C8, 16'h1560, 16'h15F8, 16'h1690, 16'h1728, 16'h17C0, 16'h1858, 16'h18F0, 16'h1988, 16'h1A20, 16'h1AB8, 16'h1B50, 16'h1BE8, 16'h1C80, 16'h1D18, 16'h1DB0, 16'h1E48, 16'h1EE0, 16'h1F78, 16'h2010, 16'h20A8, 16'h2140, 16'h21D8, 16'h2270, 16'h2308, 16'h23A0, 16'h2438, 16'h24D0, 16'h2568};
   
   state_t state_r, state_w;
   logic [254:0] a_r, a_w, b_r, b_w;
   logic [259:0] ms_w, ms_r, mc_w, mc_r;
   logic [259:0] s1, s2, s3, c1, c2, c3;
   logic [257:0] s7b, c7b, tmp;
-  logic [259:0] S, C, S_w, C_w;
+  logic [260:0] S, C, S_w, C_w;
   logic [254:0] o_montgomery_r, o_montgomery_w;
   logic [15:0] LUT1_result_r, LUT1_result_w;
   logic [2:0] LUT2idx;
@@ -77,7 +77,7 @@ module numberMul (
         c3 = {(s2 & c2) | (s2 & mc_r) | (c2 & mc_r), 1'b0};
         S_w = (s3 ^ c3) ^ {{244'b0}, LUT1_result_r};
         C_w = {(s3 & c3) | (s3 & {{244'b0}, LUT1_result_r}) | (c3 & {{244'b0}, LUT1_result_r}), 1'b0};
-        LUT1_result_w = LUT1[S_w[258:255]+C_w[258:255]];
+        LUT1_result_w = LUT1[S_w[259:255]+C_w[259:255]];
         if(cycle_r == 1) begin
           state_w = S_POST1;
         end
@@ -86,7 +86,7 @@ module numberMul (
         state_w = S_POST2;  // start reduction from the S, C, LUT1_result below
         S_w = S[254:0];
         C_w = C[254:0];
-        LUT1_result_w = LUT1[S[258:255]+C[258:255]];
+        LUT1_result_w = LUT1[S[259:255]+C[259:255]];
       end
       S_POST2: begin
         state_w = S_POST3;

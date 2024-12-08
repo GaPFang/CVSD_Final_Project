@@ -36,7 +36,7 @@
 ./montgomery.sv
 ./reduction.sv
 ./montgomeryInv.sv
-
+./numberMul.sv
 // Define Flags
 // -----------------------------------------------------------------------------
 +define+RANDOM_IO_HANDSHAKE
