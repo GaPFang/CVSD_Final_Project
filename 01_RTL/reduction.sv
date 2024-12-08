@@ -59,6 +59,7 @@ module Reduction (
         state_w = state_r;
         finished_w = 0;
         montgomery_start = 0;
+        montgomeryInv_start = 0;
         montgomery_a = 0;
         montgomery_b = 0;
         case(state_r)

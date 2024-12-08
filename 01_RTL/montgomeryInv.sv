@@ -3,8 +3,8 @@ module MontgomeryInv (
     input          i_rst,
     input          i_start,
     input  [254:0] i_x,
-    output logic [254:0] o_montgomeryInv,
-    output logic         o_finished
+    output [254:0] o_montgomeryInv,
+    output         o_finished
 );
 
 	localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
@@ -17,6 +17,7 @@ module MontgomeryInv (
 	logic signed [256:0] hLuv_w, addLuv_w, subLuv_w;
 	logic SLuv_r, SRuv_r;
 	logic SLuv_w, SRuv_w;
+	logic o_finished_r, o_finished_w;
 	wire [256:0] subLrs, hLrs, addLrs;
 	wire nSLrs;
 
@@ -26,6 +27,8 @@ module MontgomeryInv (
 	assign nSLrs = subLrs[256];
 	assign hLrs = Lrs_r >>> 1;
 	assign addLrs = Lrs_r + Rrs_r;
+	assign o_finished = o_finished_r;
+	assign o_montgomeryInv = Lrs_r;
 
 	typedef enum logic [1:0] {
 		S_IDLE,
@@ -44,6 +47,9 @@ module MontgomeryInv (
 		Lrs_w = Lrs_r;
 		Rrs_w = Rrs_r;
 		hLuv_w = hLuv_r;
+		SLuv_w = SLuv_r;
+		SRuv_w = SRuv_r;
+		o_finished_w = 0;
 		addLuv_w = addLuv_r;
 		subLuv_w = subLuv_r;
 		case(state_r)
@@ -92,14 +98,8 @@ module MontgomeryInv (
 			end
 			S_PHASE2: begin
 				if (k_r == 255) begin
-					o_montgomeryInv = Lrs_r;
-					o_finished = 1;
+					o_finished_w = 1;
 					state_w = S_IDLE;
-					k_w = 0;
-					Luv_w = 0;
-					Ruv_w = 0;
-					Lrs_w = 0;
-					Rrs_w = 1;
 				end else begin
 					k_w = k_r - 1;
 					Lrs_w = (Lrs_r[0]) ? addLrs >>> 1 : hLrs;
@@ -121,6 +121,7 @@ module MontgomeryInv (
 			subLuv_r <= 0;
 			SLuv_r <= 0;
 			SRuv_r <= 0;
+			o_finished_r <= 0;
 		end else begin
 			state_r <= state_w;
 			k_r <= k_w;
@@ -133,6 +134,7 @@ module MontgomeryInv (
 			subLuv_r <= subLuv_w;
 			SLuv_r <= SLuv_w;
 			SRuv_r <= SRuv_w;
+			o_finished_r <= o_finished_w;
 		end
 	end
 
