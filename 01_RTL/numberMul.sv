@@ -123,16 +123,16 @@ module numberMul (
         mc_w = 0;
       end
       3'b010: begin
-        ms_w = {b_r, 1'b0};
-        mc_w = 0;
+        ms_w = b_r;
+        mc_w = b_r;
       end
       3'b011: begin
         ms_w = {b_r, 1'b0};
         mc_w = b_r;
       end
       3'b100: begin
-        ms_w = {b_r, 2'b0};
-        mc_w = 0;
+        ms_w = {b_r, 1'b0};
+        mc_w = {b_r, 1'b0};
       end
       3'b101: begin
         ms_w = {b_r, 2'b0};
