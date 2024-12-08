@@ -72,7 +72,7 @@ module PointAdd(
     assign o_t3 = t3_r;
     assign o_finished = finished_r;
     
-    Montgomery montgomery0(
+    numberMul numberMul0(
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_start(i_montgomery_start_r),
@@ -82,7 +82,7 @@ module PointAdd(
         .o_finished(o_montgomery_finished)
     );
 
-    Montgomery montgomery1(
+    numberMul numberMul1(
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_start(i_montgomery_start_r),
@@ -92,7 +92,7 @@ module PointAdd(
         .o_finished()
     );
 
-    Montgomery montgomery2(
+    numberMul numberMul2(
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_start(i_montgomery_start_r),
@@ -102,7 +102,7 @@ module PointAdd(
         .o_finished()
     );
 
-    Montgomery montgomery3(
+    numberMul numberMul3(
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_start(i_montgomery_start_r),
@@ -200,12 +200,12 @@ module PointAdd(
                         state_w = S_11;
                         i_montgomery_start_w = 1;
                         i_a_w[0] = i_x1;
-                        i_b_w[0] = R_pow_2;
-                        i_a_w[1] = i_y1;
-                        i_b_w[1] = R_pow_2;
+                        i_b_w[0] = i_y1;
+                        // i_a_w[1] = i_y1;
+                        // i_b_w[1] = R_pow_2;
                         x3_w = i_x1;
                         y3_w = i_y1;
-                        z3_w = R_pow_1;
+                        z3_w = 1;
                     end else begin
                         state_w = S_1;
                         // i_a1_w = i_x1;
@@ -353,12 +353,14 @@ module PointAdd(
             end
             S_11: begin
                 if(o_montgomery_finished) begin // calculate t = xy/z, z = R, x=XR, y=YR -> t = xRyR/R = XYR
-                    state_w = S_12;
-                    i_montgomery_start_w = 1;
-                    i_a_w[0] = o_montgomery[0]; // XR
-                    i_b_w[0] = o_montgomery[1]; // YR
-                    x3_w = o_montgomery[0];
-                    y3_w = o_montgomery[1];
+                    state_w = S_IDLE;
+                    finished_w = 1;
+                    // i_montgomery_start_w = 1;
+                    // i_a_w[0] = o_montgomery[0]; // XR
+                    // i_b_w[0] = o_montgomery[1]; // YR
+                    // x3_w = o_montgomery[0];
+                    // y3_w = o_montgomery[1];
+                    t3_w = o_montgomery[0];
                 end
             end
             S_12: begin
