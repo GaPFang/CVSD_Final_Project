@@ -17,7 +17,6 @@ module numberMul (
 
   localparam cycles = 255;
   localparam cycles1_3 = 85;
-  localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
   // localparam [15:0] LUT1 [0:63] = '{16'h0, 16'h98, 16'h130, 16'h1C8, 16'h260, 16'h2F8, 16'h390, 16'h428, 16'h4C0, 16'h558, 16'h5F0, 16'h688, 16'h720, 16'h7B8, 16'h850, 16'h8E8, 16'h980, 16'hA18, 16'hAB0, 16'hB48, 16'hBE0, 16'hC78, 16'hD10, 16'hDA8, 16'hE40, 16'hED8, 16'hF70, 16'h1008, 16'h10A0, 16'h1138, 16'h11D0, 16'h1268, 16'h1300, 16'h1398, 16'h1430, 16'h14C8, 16'h1560, 16'h15F8, 16'h1690, 16'h1728, 16'h17C0, 16'h1858, 16'h18F0, 16'h1988, 16'h1A20, 16'h1AB8, 16'h1B50, 16'h1BE8, 16'h1C80, 16'h1D18, 16'h1DB0, 16'h1E48, 16'h1EE0, 16'h1F78, 16'h2010, 16'h20A8, 16'h2140, 16'h21D8, 16'h2270, 16'h2308, 16'h23A0, 16'h2438, 16'h24D0, 16'h2568};
   localparam [15:0] LUT1 [0:31] = '{16'h0, 16'h98, 16'h130, 16'h1C8, 16'h260, 16'h2F8, 16'h390, 16'h428, 16'h4C0, 16'h558, 16'h5F0, 16'h688, 16'h720, 16'h7B8, 16'h850, 16'h8E8, 16'h980, 16'hA18, 16'hAB0, 16'hB48, 16'hBE0, 16'hC78, 16'hD10, 16'hDA8, 16'hE40, 16'hED8, 16'hF70, 16'h1008, 16'h10A0, 16'h1138, 16'h11D0, 16'h1268};
   state_t state_r, state_w;
@@ -97,8 +96,8 @@ module numberMul (
       end
       S_POST3: begin
         tmp = S+C;
-        if(tmp >= N)
-          o_montgomery_w = tmp - N;
+        if(tmp >= `N)
+          o_montgomery_w = tmp - `N;
         else
           o_montgomery_w = tmp;
         state_w = S_IDLE;

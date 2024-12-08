@@ -7,9 +7,6 @@ module MontgomeryInv (
     output         o_finished
 );
 
-	localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
-
-	// Phase1
 	logic [10:0] k_r, k_w;
 	logic signed [256:0] Luv_r, Ruv_r, Lrs_r, Rrs_r;
 	logic signed [256:0] Luv_w, Ruv_w, Lrs_w, Rrs_w;
@@ -57,7 +54,7 @@ module MontgomeryInv (
 				if(i_start) begin
 					k_w = 0;
 					Luv_w = i_x << 1;
-					Ruv_w = N;
+					Ruv_w = `N;
 					Lrs_w = 1;
 					Rrs_w = 0;
 					state_w = S_PHASE1_1;
@@ -74,8 +71,8 @@ module MontgomeryInv (
 			S_PHASE1_2: begin
 				if (Luv_r[1] == 1'b0) begin
 					if (SLuv_r == (Luv_r > 0)) begin
-						Lrs_w = (subLrs[256]) ? subLrs + N : subLrs;
-						Rrs_w = N;
+						Lrs_w = (subLrs[256]) ? subLrs + `N : subLrs;
+						Rrs_w = `N;
 						state_w = S_PHASE2;
 					end else begin
 						Luv_w = hLuv_r;

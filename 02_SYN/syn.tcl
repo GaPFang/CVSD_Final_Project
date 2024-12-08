@@ -28,7 +28,8 @@ set sh_line_editing_mode emacs
 history keep 100
 alias h history
 
-read_file -format sverilog  "../01_RTL/ed25519.sv"
+analyze -format sverilog "flist.sv"
+elaborate $DESIGN
 current_design [get_designs $DESIGN]
 link
 
@@ -54,7 +55,7 @@ current_design [get_designs ${DESIGN}]
 report_timing -delay min -max_paths 10 > "./Report/${DESIGN}_syn.timing_min" 
 report_timing -delay max -max_paths 10 > "./Report/${DESIGN}_syn.timing_max"
 report_area -hierarchy > "./Report/${DESIGN}_syn.area"
-report_clock_gating > "./Report/${DESIGN}_syn.cg"
+# report_clock_gating > "./Report/${DESIGN}_syn.cg"
 
 # Output Design
 current_design [get_designs ${DESIGN}]
@@ -72,8 +73,8 @@ change_names -hierarchy -rules name_rule
 remove_unconnected_ports -blast_buses [get_cells -hierarchical *]
 set verilogout_higher_designs_first true
 write -format ddc     -hierarchy -output "./Netlist/${DESIGN}_syn.ddc"
-write -format verilog -hierarchy -output "./Netlist/${DESIGN}_syn.v"
-write_sdf -version 2.1  -context verilog -load_delay cell ./Netlist/${DESIGN}_syn.sdf
+write -format verilog -hierarchy -output "../03_GATE/${DESIGN}_syn.v"
+write_sdf -version 2.1  -context verilog -load_delay cell ../03_GATE/${DESIGN}_syn.sdf
 write_sdc  ./Netlist/${DESIGN}_syn.sdc -version 1.8
 
 exit
