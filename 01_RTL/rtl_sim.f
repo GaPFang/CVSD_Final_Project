@@ -30,6 +30,7 @@
 
 // Your Design Files
 // -----------------------------------------------------------------------------
+./constant.vh
 ./ed25519.sv
 ./scalarMul_wNAF_Extended.sv
 ./pointAddExtended.sv

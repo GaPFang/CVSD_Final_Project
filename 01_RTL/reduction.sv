@@ -33,7 +33,7 @@ module Reduction (
 
     state_t state_r, state_w;
 
-    Montgomery numberMul1(
+    Montgomery montgomery(
         .i_clk(i_clk),
         .i_rst(i_rst),
         .i_start(montgomery_start),

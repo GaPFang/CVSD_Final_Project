@@ -11,9 +11,6 @@ module Montgomery (
         S_CALC
     } state_t;
 
-    localparam cycles = 255;
-    localparam N = 255'd57896044618658097711785492504343953926634992332820282019728792003956564819949;
-
     state_t state_r, state_w;
     logic [256:0] tmp [0:1];
     logic [256:0] m_r;
@@ -42,10 +39,10 @@ module Montgomery (
             end
             S_CALC: begin
                 cycle_w = cycle_r + 1;
-                if(cycle_r < cycles) begin
+                if(cycle_r < 255) begin
                     state_w = S_CALC;
                     tmp[0] = a[cycle_r] ? m_r + b : m_r;
-                    tmp[1] = tmp[0][0] ? tmp[0] + N : tmp[0];
+                    tmp[1] = tmp[0][0] ? tmp[0] + `N : tmp[0];
                     m_w = tmp[1] >> 1;
                 end else begin
                     state_w = S_IDLE;
@@ -66,7 +63,7 @@ module Montgomery (
             b <= 0;
         end else begin
             o_finished_r <= 0;
-            o_montgomery_r <= (m_r >= {2'b0, N}) ? m_r - N : m_r;
+            o_montgomery_r <= (m_r >= {2'b0, `N}) ? m_r - `N : m_r;
             state_r <= state_w;
             cycle_r <= cycle_w;
             if (state_r == S_IDLE && state_w == S_CALC) begin

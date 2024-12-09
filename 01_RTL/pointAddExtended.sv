@@ -160,6 +160,10 @@ module PointAdd(
         y2_w = y2_r;
         z2_w = z2_r;
         t2_w = t2_r;
+        for (i=0; i<4; i=i+1) begin
+            i_a[i] = 0;
+            i_b[i] = 0;
+        end
         i_montgomery1_start = 0;
         for(i=0; i<2; i=i+1) begin
             MA_a[i] = 0;
@@ -360,9 +364,8 @@ module modularAdd (
         modularAdd = add;
         if (add > `N) begin
             modularAdd = add - `N;
+        end
     end
-    end
-    
 
 endmodule
 
@@ -380,6 +383,5 @@ module modularSub (
             modularSub = sub - `N;
         end
     end
-endmodule
 
-    
+endmodule

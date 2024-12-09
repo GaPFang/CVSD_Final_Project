@@ -6,5 +6,5 @@
 !*.tcl
 !*.ddc
 !*.sdf
-!*.area
+!*ed25519_syn*
 !*/
