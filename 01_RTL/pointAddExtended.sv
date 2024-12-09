@@ -356,15 +356,14 @@ module modularAdd (
    input [254:0] a, b,
    output [254:0] result
 );
-    logic [256:0] add;
+    logic [255:0] add;
+    logic [255:0] tmp;
     logic [254:0] modularAdd;
     assign result = modularAdd;
     always_comb begin
         add = a + b;
-        modularAdd = add;
-        if (add > `N) begin
-            modularAdd = add - `N;
-        end
+        tmp = add - `N;
+        modularAdd = (tmp[255]) ? add : tmp;
     end
 
 endmodule
@@ -373,15 +372,12 @@ module modularSub (
     input [254:0] a, b,
     output [254:0] result
 );
-    logic [256:0] sub;
+    logic [255:0] sub;
     logic [254:0] modularSub;
     assign result = modularSub;
     always_comb begin
-        sub = a + `N - b;
-        modularSub = sub;
-        if (sub > `N) begin
-            modularSub = sub - `N;
-        end
+        sub = a - b;
+        modularSub = (sub[255]) ? sub + `N : sub;
     end
 
 endmodule

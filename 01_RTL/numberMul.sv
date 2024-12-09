@@ -24,7 +24,6 @@ module numberMul (
   logic [259:0] s1, s2, s3, c1, c2, c3;
   logic [257:0] s7b, c7b, tmp;
   logic [260:0] S, C, S_w, C_w;
-  logic [254:0] o_montgomery_r, o_montgomery_w;
   logic [15:0] LUT1_result_r, LUT1_result_w;
   logic [2:0] LUT2idx;
   logic o_finished_r, o_finished_w;
@@ -34,12 +33,11 @@ module numberMul (
   CSA csa0(.a({b_r, 2'b0}), .b({1'b0, b_r, 1'b0}), .cin({2'b0, b_r}), .s(s7b), .cout(c7b));
 
   assign o_finished = o_finished_r;
-  assign o_montgomery = o_montgomery_r;
+  assign o_montgomery = a_r;
 
   always_comb begin
     state_w = state_r;
     o_finished_w = 0;
-    o_montgomery_w = 0;
     cycle_w = 0;
     a_w = a_r;
     b_w = b_r;
@@ -97,9 +95,9 @@ module numberMul (
       S_POST3: begin
         tmp = S+C;
         if(tmp >= `N)
-          o_montgomery_w = tmp - `N;
+          a_w = tmp - `N;
         else
-          o_montgomery_w = tmp;
+          a_w = tmp;
         state_w = S_IDLE;
         o_finished_w = 1;
       end
@@ -153,7 +151,6 @@ module numberMul (
       state_r <= S_IDLE;
       cycle_r <= 0;
       o_finished_r <= 0;
-      o_montgomery_r <= 0;
       a_r <= 0;
       b_r <= 0;
       ms_r <= 0;
@@ -162,7 +159,6 @@ module numberMul (
       S <= 0;
       C <= 0;
     end else begin
-      o_montgomery_r <= o_montgomery_w;
       state_r <= state_w;
       cycle_r <= cycle_w;
       ms_r <= ms_w;
