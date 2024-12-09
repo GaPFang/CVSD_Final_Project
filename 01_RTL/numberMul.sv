@@ -54,15 +54,16 @@ module numberMul (
     LUT1_result_w = 0;
     case(state_r)
       S_IDLE: begin
+        b_w = i_b;
+        a_w = i_a;
         if(i_start) begin
           state_w = S_PRECOMP;
-          b_w = i_b;
-          a_w = i_a;
         end
       end
       S_PRECOMP: begin
         cycle_w = cycles1_3;
         state_w = S_CALC;
+        a_w = {a_r[251:0], 3'b0};
       end
       S_CALC: begin
         cycle_w = cycle_r - 1;
@@ -110,7 +111,7 @@ module numberMul (
   always_comb begin
     ms_w = 0;
     mc_w = 0;
-    LUT2idx = a_w[254: 252];
+    LUT2idx = a_r[254:252];
     case(LUT2idx)
       3'b000: begin
         ms_w = 0;

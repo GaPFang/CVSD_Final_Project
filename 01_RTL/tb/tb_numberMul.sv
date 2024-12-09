@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-
+`include "./constant.vh"
 module tb_Montgomery();
 
     // Inputs to the Montgomery module
