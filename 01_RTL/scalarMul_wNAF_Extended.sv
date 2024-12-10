@@ -29,24 +29,17 @@ module ScalarMul (
     logic [7:0] cnt_r, cnt_w;
     logic [2:0] precompute_cnt_r, precompute_cnt_w;
     logic [(two_pow_wMinus2-1):0][254:0] Ps_x_r, Ps_x_w, Ps_y_r, Ps_y_w, Ps_z_r, Ps_z_w, Ps_t_r, Ps_t_w;
-    logic [254:0] P_double_x_r, P_double_x_w, P_double_y_r, P_double_y_w, P_double_z_r, P_double_z_w, P_double_t_r, P_double_t_w;
     logic [254:0] x_r, y_r, z_r, x_w, y_w, z_w, t_r, t_w;
     logic finished_r, finished_w;
     logic [254:0] pointAdd_x1, pointAdd_y1, pointAdd_z1, pointAdd_t1, pointAdd_x2, pointAdd_y2, pointAdd_z2, pointAdd_t2, pointAdd_x3, pointAdd_y3, pointAdd_z3, pointAdd_t3;
     logic pointAdd_start, pointAdd_finished, pointAdd_doubling, pointAdd_initial;
     wire [(w-1):0] naf_tmp = NAF_r[cnt_r];
     wire [(w-2):0] naf = naf_tmp[(w-1):1];
-    wire [254:0] Ps_x_0 = Ps_x_r[0];
-    wire [254:0] Ps_x_1 = Ps_x_r[1];
-    wire [254:0] Ps_x_2 = Ps_x_r[2];
-    wire [254:0] Ps_x_3 = Ps_x_r[3];
 
     assign o_x = x_r;
     assign o_y = y_r;
     assign o_z = z_r;
     assign o_finished = finished_r;
-
-    integer i, j;
 
     PointAdd pointAdd(
         .i_clk(i_clk),
@@ -89,19 +82,11 @@ module ScalarMul (
         pointAdd_y2 = 0;
         pointAdd_z2 = 0;
         pointAdd_t2 = 0;
-        P_double_x_w = P_double_x_r;
-        P_double_y_w = P_double_y_r;
-        P_double_z_w = P_double_z_r;
-        P_double_t_w = P_double_t_r;
-        for (i = 0; i < two_pow_wMinus2; i = i + 1) begin
-            Ps_x_w[i] = Ps_x_r[i];
-            Ps_y_w[i] = Ps_y_r[i];
-            Ps_z_w[i] = Ps_z_r[i];
-            Ps_t_w[i] = Ps_t_r[i];
-        end
-        for (i = 0; i < 255; i = i + 1) begin
-            NAF_w[i] = NAF_r[i];
-        end
+        Ps_x_w = Ps_x_r;
+        Ps_y_w = Ps_y_r;
+        Ps_z_w = Ps_z_r;
+        Ps_t_w = Ps_t_r;
+        NAF_w = NAF_r;
         pointAdd_x1 = pointAdd_x3;
         pointAdd_y1 = pointAdd_y3;
         pointAdd_z1 = pointAdd_z3;
@@ -139,10 +124,10 @@ module ScalarMul (
             end
             S_DOUBLE: begin
                 if (pointAdd_finished) begin
-                    P_double_x_w = pointAdd_x3;
-                    P_double_y_w = pointAdd_y3;
-                    P_double_z_w = pointAdd_z3;
-                    P_double_t_w = pointAdd_t3;
+                    Ps_x_w[two_pow_wMinus2-1] = pointAdd_x3;
+                    Ps_y_w[two_pow_wMinus2-1] = pointAdd_y3;
+                    Ps_z_w[two_pow_wMinus2-1] = pointAdd_z3;
+                    Ps_t_w[two_pow_wMinus2-1] = pointAdd_t3;
                     precompute_cnt_w = 1;
                     state_w = S_NAF_AND_PRECOMPUTE;
                     pointAdd_start = 1;
@@ -179,10 +164,10 @@ module ScalarMul (
                         pointAdd_y1 = pointAdd_y3;
                         pointAdd_z1 = pointAdd_z3;
                         pointAdd_t1 = pointAdd_t3;
-                        pointAdd_x2 = P_double_x_r;
-                        pointAdd_y2 = P_double_y_r;
-                        pointAdd_z2 = P_double_z_r;
-                        pointAdd_t2 = P_double_t_r;
+                        pointAdd_x2 = Ps_x_r[two_pow_wMinus2-1];
+                        pointAdd_y2 = Ps_y_r[two_pow_wMinus2-1];
+                        pointAdd_z2 = Ps_z_r[two_pow_wMinus2-1];
+                        pointAdd_t2 = Ps_t_r[two_pow_wMinus2-1];
                         precompute_cnt_w = precompute_cnt_r + 1;
                     end
                 end
@@ -265,19 +250,11 @@ module ScalarMul (
             finished_r <= 0;
             cnt_r <= 0;
             precompute_cnt_r <= 0;
-            P_double_x_r <= 0;
-            P_double_y_r <= 0;
-            P_double_z_r <= 0;
-            P_double_t_r <= 0;
-            for (j = 0; j < two_pow_wMinus2; j = j + 1) begin
-                Ps_x_r[j] <= 0;
-                Ps_y_r[j] <= 0;
-                Ps_z_r[j] <= 0;
-                Ps_t_r[j] <= 0;
-            end
-            for (j = 0; j < 255; j = j + 1) begin
-                NAF_r[j] <= 0;
-            end
+            Ps_x_r <= 0;
+            Ps_y_r <= 0;
+            Ps_z_r <= 0;
+            Ps_t_r <= 0;
+            NAF_r <= 0;
         end else begin
             state_r <= state_w;
             M_r <= M_w;
@@ -288,19 +265,11 @@ module ScalarMul (
             finished_r <= finished_w;
             cnt_r <= cnt_w;
             precompute_cnt_r <= precompute_cnt_w;
-            P_double_x_r <= P_double_x_w;
-            P_double_y_r <= P_double_y_w;
-            P_double_z_r <= P_double_z_w;
-            P_double_t_r <= P_double_t_w;
-            for (j = 0; j < two_pow_wMinus2; j = j + 1) begin
-                Ps_x_r[j] <= Ps_x_w[j];
-                Ps_y_r[j] <= Ps_y_w[j];
-                Ps_z_r[j] <= Ps_z_w[j];
-                Ps_t_r[j] <= Ps_t_w[j];
-            end
-            for (j = 0; j < 255; j = j + 1) begin
-                NAF_r[j] <= NAF_w[j];
-            end
+            Ps_x_r <= Ps_x_w;
+            Ps_y_r <= Ps_y_w;
+            Ps_z_r <= Ps_z_w;
+            Ps_t_r <= Ps_t_w;
+            NAF_r <= NAF_w;
         end
     end
 
