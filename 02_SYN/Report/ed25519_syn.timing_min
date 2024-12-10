@@ -8,7 +8,7 @@ Report : timing
         -max_paths 10
 Design : ed25519
 Version: U-2022.12
-Date   : Mon Dec  9 11:06:36 2024
+Date   : Tue Dec 10 21:48:28 2024
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -16,9 +16,9 @@ Date   : Mon Dec  9 11:06:36 2024
 Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
-  Startpoint: reduction1/montgomery/cycle_r_reg[0]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[147]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: reduction1/montgomery/cycle_r_reg[0]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[147]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -27,28 +27,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  reduction1/montgomery/cycle_r_reg[0]/CK (DFFHQX4)       0.00 #     0.50 r
-  reduction1/montgomery/cycle_r_reg[0]/Q (DFFHQX4)        0.19       0.69 r
-  reduction1/montgomery/U1108/Y (NOR2XL)                  0.08       0.77 f
-  reduction1/montgomery/cycle_r_reg[0]/D (DFFHQX4)        0.00       0.77 f
-  data arrival time                                                  0.77
+  scalarMul1/pointAdd/t2_r_reg[147]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[147]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24185/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U621/Y (OAI2BB1X1)                  0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[147]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  reduction1/montgomery/cycle_r_reg[0]/CK (DFFHQX4)       0.00       0.60 r
-  library hold time                                      -0.08       0.52
-  data required time                                                 0.52
+  scalarMul1/pointAdd/t2_r_reg[147]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.52
-  data arrival time                                                 -0.77
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.24
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[14]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[111]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[14]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[111]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -57,33 +58,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[14]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[14]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11696/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U585/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[14]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[111]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[111]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24134/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U2588/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[111]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[14]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[111]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[4]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[102]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[4]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[102]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -92,33 +89,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[4]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[4]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11601/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U373/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[4]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[102]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[102]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24125/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U4615/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[102]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[4]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[102]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[5]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[110]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[5]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[110]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -127,33 +120,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[5]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[5]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11693/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U371/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[5]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[110]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[110]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24133/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U2591/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[110]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[5]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[110]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[6]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[106]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[6]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[106]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -162,33 +151,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[6]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[6]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11784/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U581/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[6]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[106]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[106]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24129/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U2589/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[106]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[6]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[106]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[7]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[108]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[7]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[108]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -197,33 +182,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[7]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[7]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11602/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U372/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[7]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[108]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[108]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24131/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U2590/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[108]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[7]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[108]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[24]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[104]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[24]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[104]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -232,33 +213,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[24]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[24]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11790/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U478/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[24]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[104]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[104]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24127/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U2585/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[104]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[24]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[104]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[19]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[101]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[19]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[101]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -267,33 +244,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[19]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[19]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11607/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U468/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[19]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[101]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[101]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24124/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U1132/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[101]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[19]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[101]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[21]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[103]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[21]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[103]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -302,33 +275,29 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[21]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[21]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11789/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U456/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[21]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[103]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[103]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24126/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U2584/Y (OAI2BB1X1)                 0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[103]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[21]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[103]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[20]
+  Startpoint: scalarMul1/pointAdd/t2_r_reg[172]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[20]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[172]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: min
@@ -337,28 +306,24 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul2/a_r_reg[20]/CK (DFFHQX2)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[20]/Q (DFFHQX2)
-                                                          0.18       0.68 r
-  scalarMul1/pointAdd/numberMul2/U11698/Y (AOI22XL)       0.07       0.75 f
-  scalarMul1/pointAdd/numberMul2/U584/Y (OAI2BB1X1)       0.08       0.83 r
-  scalarMul1/pointAdd/numberMul2/a_r_reg[20]/D (DFFHQX2)
-                                                          0.00       0.83 r
-  data arrival time                                                  0.83
+  scalarMul1/pointAdd/t2_r_reg[172]/CK (DFFHQX4)          0.00 #     0.50 r
+  scalarMul1/pointAdd/t2_r_reg[172]/Q (DFFHQX4)           0.16       0.66 r
+  scalarMul1/pointAdd/U24220/Y (NAND2XL)                  0.06       0.71 f
+  scalarMul1/pointAdd/U6/Y (OAI2BB1X1)                    0.08       0.79 r
+  scalarMul1/pointAdd/t2_r_reg[172]/D (DFFHQX4)           0.00       0.79 r
+  data arrival time                                                  0.79
 
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  scalarMul1/pointAdd/numberMul2/a_r_reg[20]/CK (DFFHQX2)
-                                                          0.00       0.60 r
-  library hold time                                      -0.04       0.56
-  data required time                                                 0.56
+  scalarMul1/pointAdd/t2_r_reg[172]/CK (DFFHQX4)          0.00       0.60 r
+  library hold time                                      -0.03       0.57
+  data required time                                                 0.57
   --------------------------------------------------------------------------
-  data required time                                                 0.56
-  data arrival time                                                 -0.83
+  data required time                                                 0.57
+  data arrival time                                                 -0.79
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.27
+  slack (MET)                                                        0.23
 
 
 1

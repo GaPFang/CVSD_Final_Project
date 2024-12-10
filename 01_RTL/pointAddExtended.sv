@@ -31,9 +31,9 @@ module PointAdd(
         S_6,
         S_7,
         S_8,
-        S_9
-        // S_10,
-        // S_11,
+        S_9,
+        S_10,
+        S_11
         // S_12,
         // S_13,
         // S_14,
@@ -190,11 +190,9 @@ module PointAdd(
                 if (i_start) begin
                     // i_montgomery1_start = 1;
                     if (i_doubling) begin
-                        state_w = S_6;
-                        MA_a[0] = i_y1;
-                        MA_b[0] = i_x1;
+                        state_w = S_7;
                     end else if(i_initial) begin    // calculate XR, YR
-                        state_w = S_5;
+                        state_w = S_6;
                         i_montgomery1_start = 1;
                         i_a[0] = i_x1;
                         i_b[0] = 1;
@@ -209,19 +207,22 @@ module PointAdd(
                         z1_w = 1;
                     end else begin
                         state_w = S_1;
-                        MA_a[0] = i_y2;
-                        MA_b[0] = i_x2;
-                        MA_a[1] = i_y1;
-                        MA_b[1] = i_x1;
-                        MS_a[0] = i_y1;
-                        MS_b[0] = i_x1;
-                        MS_a[1] = i_y2;
-                        MS_b[1] = i_x2;
                     end
                 end
             end
             S_1: begin
                 state_w = S_2;
+                MA_a[0] = y2_r;
+                MA_b[0] = x2_r;
+                MA_a[1] = y1_r;
+                MA_b[1] = x1_r;
+                MS_a[0] = y1_r;
+                MS_b[0] = x1_r;
+                MS_a[1] = y2_r;
+                MS_b[1] = x2_r;
+            end
+            S_2: begin
+                state_w = S_3;
                 i_montgomery1_start = 1;
                 i_a[0] = MS_result[0];
                 i_b[0] = MA_result[0];
@@ -232,7 +233,7 @@ module PointAdd(
                 i_a[3] = t1_r;
                 i_b[3] = z2_r;
             end
-            S_2: begin
+            S_3: begin
                 MA_a[0] = o_montgomery[3];
                 MA_b[0] = o_montgomery[2];
                 MS_a[0] = o_montgomery[3];
@@ -242,10 +243,10 @@ module PointAdd(
                 MS_a[1] = o_montgomery[1];
                 MS_b[1] = o_montgomery[0];
                 if (o_montgomery_finished) begin
-                    state_w = S_3;
+                    state_w = S_4;
                 end
             end
-            S_3: begin
+            S_4: begin
                 x1_w = MA_result[0];        // E
                 y1_w = MS_result[0];        // H
                 z1_w = MS_result[1];        // F
@@ -254,9 +255,9 @@ module PointAdd(
                 MA_b[0] = x1_w;
                 MA_a[1] = y1_w;
                 MA_b[1] = y1_w;
-                state_w = S_4;
+                state_w = S_5;
             end
-            S_4: begin
+            S_5: begin
                 x1_w = MA_result[0];            // 2 * E
                 y1_w = MA_result[1];            // 2 * H
                 i_montgomery1_start = 1;
@@ -268,9 +269,9 @@ module PointAdd(
                 i_b[2] = y1_w;
                 i_a[3] = z1_r;    // F*G -> z3
                 i_b[3] = t1_r;
-                state_w = S_5;
+                state_w = S_6;
             end
-            S_5: begin
+            S_6: begin
                 if (o_montgomery_finished) begin
                     state_w = S_IDLE;
                     finished_w = 1;
@@ -280,8 +281,13 @@ module PointAdd(
                     z1_w = o_montgomery[3];
                 end
             end
-            S_6: begin
-                state_w = S_7;
+            S_7: begin
+                state_w = S_8;
+                MA_a[0] = y1_r;
+                MA_b[0] = x1_r;
+            end
+            S_8: begin
+                state_w = S_9;
                 i_montgomery1_start = 1;
                 x1_w = MA_result[0];    // x1 + y1
                 i_a[0] = x1_r;            // x1^2 (A)
@@ -293,7 +299,7 @@ module PointAdd(
                 i_a[3] = x1_w;        // (x1 + y1)^2
                 i_b[3] = x1_w;
             end
-            S_7: begin
+            S_9: begin
                 MA_a[0] = o_montgomery[1];
                 MA_b[0] = o_montgomery[0];
                 MS_a[0] = o_montgomery[1];
@@ -302,10 +308,10 @@ module PointAdd(
                 MA_b[1] = o_montgomery[2];
                 t1_w = o_montgomery[3]; // (x1 + y1)^2
                 if (o_montgomery_finished) begin
-                    state_w = S_8;
+                    state_w = S_10;
                 end
             end
-            S_8: begin
+            S_10: begin
                 x1_w = MA_result[0];    // y1^2 + x1^2 (A+B)
                 y1_w = MS_result[0];    // y1^2 - x1^2 (G)
                 z1_w = MA_result[1];    // 2 * z1^2 (C)
@@ -313,10 +319,10 @@ module PointAdd(
                 MS_b[0] = x1_w;
                 MS_a[1] = y1_w;
                 MS_b[1] = z1_w;
-                state_w = S_9;
+                state_w = S_11;
             end
-            S_9: begin
-                state_w = S_5;
+            S_11: begin
+                state_w = S_6;
                 i_montgomery1_start = 1;
                 x1_w = MS_result[0];        // E = (x1 + y1)^2 - (A+B)
                 y1_w = MS_result[1];        // F = G-C

@@ -6,7 +6,7 @@ Report : timing
         -max_paths 10
 Design : ed25519
 Version: U-2022.12
-Date   : Mon Dec  9 11:06:37 2024
+Date   : Tue Dec 10 21:48:29 2024
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -14,9 +14,9 @@ Date   : Mon Dec  9 11:06:37 2024
 Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
-  Startpoint: scalarMul1/pointAdd/numberMul0/o_finished_r_reg
+  Startpoint: scalarMul1/pointAdd/numberMul2/S_reg[38]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[192]
+  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[35]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -25,76 +25,55 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul0/o_finished_r_reg/CK (DFFHQX2)
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/CK (DFFQX2)
                                                           0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul0/o_finished_r_reg/Q (DFFHQX2)
-                                                          0.25       0.75 f
-  scalarMul1/pointAdd/numberMul0/o_finished (numberMul_3)
-                                                          0.00       0.75 f
-  scalarMul1/pointAdd/U2928/Y (NAND2X6)                   0.08       0.83 r
-  scalarMul1/pointAdd/U3257/Y (INVX8)                     0.05       0.88 f
-  scalarMul1/pointAdd/U1323/Y (NAND2X6)                   0.06       0.94 r
-  scalarMul1/pointAdd/U1727/Y (INVX12)                    0.07       1.01 f
-  scalarMul1/pointAdd/U4616/Y (INVX20)                    0.11       1.12 r
-  scalarMul1/pointAdd/U3370/Y (INVXL)                     0.07       1.18 f
-  scalarMul1/pointAdd/U375/Y (AOI2BB2X1)                  0.17       1.35 r
-  scalarMul1/pointAdd/U3369/Y (INVXL)                     0.06       1.41 f
-  scalarMul1/pointAdd/U3368/Y (NAND3BX1)                  0.19       1.60 f
-  scalarMul1/pointAdd/MS0/a[152] (modularSub_1)           0.00       1.60 f
-  scalarMul1/pointAdd/MS0/U354/Y (OR2X1)                  0.28       1.89 f
-  scalarMul1/pointAdd/MS0/U821/Y (INVX2)                  0.07       1.96 r
-  scalarMul1/pointAdd/MS0/U1732/Y (NOR2BX2)               0.14       2.10 r
-  scalarMul1/pointAdd/MS0/U923/Y (OAI21X1)                0.08       2.18 f
-  scalarMul1/pointAdd/MS0/U385/Y (AOI21X1)                0.18       2.36 r
-  scalarMul1/pointAdd/MS0/U2181/Y (OAI21X1)               0.14       2.50 f
-  scalarMul1/pointAdd/MS0/U2180/Y (AOI21X4)               0.11       2.61 r
-  scalarMul1/pointAdd/MS0/U868/Y (NAND2X4)                0.08       2.69 f
-  scalarMul1/pointAdd/MS0/U863/Y (INVX2)                  0.06       2.75 r
-  scalarMul1/pointAdd/MS0/U2119/Y (XNOR2X1)               0.14       2.89 f
-  scalarMul1/pointAdd/MS0/U2118/Y (NOR2BX1)               0.16       3.04 r
-  scalarMul1/pointAdd/MS0/U1176/Y (NAND3X2)               0.12       3.17 f
-  scalarMul1/pointAdd/MS0/U1112/Y (NOR3X4)                0.09       3.26 r
-  scalarMul1/pointAdd/MS0/U1158/Y (NAND3X4)               0.10       3.36 f
-  scalarMul1/pointAdd/MS0/U1191/Y (NOR2X6)                0.10       3.46 r
-  scalarMul1/pointAdd/MS0/U1131/Y (NAND3X8)               0.09       3.55 f
-  scalarMul1/pointAdd/MS0/U1130/Y (NAND2X8)               0.11       3.66 r
-  scalarMul1/pointAdd/MS0/U1325/Y (NAND2X6)               0.08       3.73 f
-  scalarMul1/pointAdd/MS0/U54/Y (INVX6)                   0.07       3.80 r
-  scalarMul1/pointAdd/MS0/U835/Y (BUFX12)                 0.11       3.91 r
-  scalarMul1/pointAdd/MS0/U5839/Y (INVX3)                 0.11       4.03 f
-  scalarMul1/pointAdd/MS0/U5887/Y (OAI21XL)               0.18       4.21 r
-  scalarMul1/pointAdd/MS0/U40/Y (AO21XL)                  0.16       4.37 r
-  scalarMul1/pointAdd/MS0/U752/Y (INVX1)                  0.05       4.42 f
-  scalarMul1/pointAdd/MS0/U7/Y (OAI21X1)                  0.07       4.49 r
-  scalarMul1/pointAdd/MS0/U3/Y (XNOR2X1)                  0.20       4.69 f
-  scalarMul1/pointAdd/MS0/result[192] (modularSub_1)      0.00       4.69 f
-  scalarMul1/pointAdd/U3371/Y (OAI2BB1X4)                 0.16       4.85 f
-  scalarMul1/pointAdd/U20456/Y (NOR2X2)                   0.07       4.92 r
-  scalarMul1/pointAdd/U1784/Y (OAI21XL)                   0.07       4.99 f
-  scalarMul1/pointAdd/numberMul2/i_a[192] (numberMul_1)
-                                                          0.00       4.99 f
-  scalarMul1/pointAdd/numberMul2/U547/Y (OAI2BB1X1)       0.16       5.15 f
-  scalarMul1/pointAdd/numberMul2/a_r_reg[192]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/Q (DFFQX2)     0.23       0.73 f
+  scalarMul1/pointAdd/numberMul2/U2350/Y (NAND2XL)        0.18       0.91 r
+  scalarMul1/pointAdd/numberMul2/U847/Y (OAI21X1)         0.10       1.01 f
+  scalarMul1/pointAdd/numberMul2/U516/Y (AOI21X1)         0.15       1.16 r
+  scalarMul1/pointAdd/numberMul2/U636/Y (OAI21X2)         0.09       1.25 f
+  scalarMul1/pointAdd/numberMul2/U502/Y (NAND2XL)         0.10       1.35 r
+  scalarMul1/pointAdd/numberMul2/U626/Y (NAND2X1)         0.11       1.46 f
+  scalarMul1/pointAdd/numberMul2/U1263/Y (NAND2BX1)       0.12       1.59 r
+  scalarMul1/pointAdd/numberMul2/U483/Y (NAND3X2)         0.14       1.73 f
+  scalarMul1/pointAdd/numberMul2/U395/Y (NAND2X1)         0.11       1.84 r
+  scalarMul1/pointAdd/numberMul2/U3414/Y (XOR2X1)         0.15       1.99 f
+  scalarMul1/pointAdd/numberMul2/U732/Y (AND4X2)          0.23       2.22 f
+  scalarMul1/pointAdd/numberMul2/U722/Y (NOR2BX2)         0.15       2.37 f
+  scalarMul1/pointAdd/numberMul2/U719/Y (NAND3X2)         0.12       2.49 r
+  scalarMul1/pointAdd/numberMul2/U1245/Y (NOR3X4)         0.09       2.58 f
+  scalarMul1/pointAdd/numberMul2/U589/Y (NAND3X4)         0.10       2.67 r
+  scalarMul1/pointAdd/numberMul2/U711/Y (NAND2X6)         0.08       2.76 f
+  scalarMul1/pointAdd/numberMul2/U702/Y (NOR2X6)          0.08       2.84 r
+  scalarMul1/pointAdd/numberMul2/U1544/Y (NOR2X4)         0.06       2.90 f
+  scalarMul1/pointAdd/numberMul2/U1542/Y (NOR2X6)         0.10       3.00 r
+  scalarMul1/pointAdd/numberMul2/U1500/Y (BUFX8)          0.11       3.11 r
+  scalarMul1/pointAdd/numberMul2/U328/Y (INVX3)           0.12       3.23 f
+  scalarMul1/pointAdd/numberMul2/U247/Y (AOI21XL)         0.19       3.41 r
+  scalarMul1/pointAdd/numberMul2/U10051/Y (OAI21X1)       0.10       3.51 f
+  scalarMul1/pointAdd/numberMul2/U10054/Y (XNOR2X1)       0.14       3.65 f
+  scalarMul1/pointAdd/numberMul2/U1101/Y (OAI2BB1X1)      0.17       3.82 f
+  scalarMul1/pointAdd/numberMul2/a_r_reg[35]/D (DFFHQX2)
+                                                          0.00       3.82 f
+  data arrival time                                                  3.82
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul2/a_r_reg[192]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/numberMul2/a_r_reg[35]/CK (DFFHQX2)
+                                                          0.00       4.00 r
+  library setup time                                     -0.18       3.82
+  data required time                                                 3.82
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.82
+  data arrival time                                                 -3.82
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul0/o_finished_r_reg
+  Startpoint: scalarMul1/pointAdd/numberMul2/S_reg[38]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[170]
+  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[201]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -103,76 +82,55 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul0/o_finished_r_reg/CK (DFFHQX2)
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/CK (DFFQX2)
                                                           0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul0/o_finished_r_reg/Q (DFFHQX2)
-                                                          0.25       0.75 f
-  scalarMul1/pointAdd/numberMul0/o_finished (numberMul_3)
-                                                          0.00       0.75 f
-  scalarMul1/pointAdd/U2928/Y (NAND2X6)                   0.08       0.83 r
-  scalarMul1/pointAdd/U3257/Y (INVX8)                     0.05       0.88 f
-  scalarMul1/pointAdd/U1323/Y (NAND2X6)                   0.06       0.94 r
-  scalarMul1/pointAdd/U1727/Y (INVX12)                    0.07       1.01 f
-  scalarMul1/pointAdd/U4616/Y (INVX20)                    0.11       1.12 r
-  scalarMul1/pointAdd/U3370/Y (INVXL)                     0.07       1.18 f
-  scalarMul1/pointAdd/U375/Y (AOI2BB2X1)                  0.17       1.35 r
-  scalarMul1/pointAdd/U3369/Y (INVXL)                     0.06       1.41 f
-  scalarMul1/pointAdd/U3368/Y (NAND3BX1)                  0.19       1.60 f
-  scalarMul1/pointAdd/MS0/a[152] (modularSub_1)           0.00       1.60 f
-  scalarMul1/pointAdd/MS0/U354/Y (OR2X1)                  0.28       1.89 f
-  scalarMul1/pointAdd/MS0/U821/Y (INVX2)                  0.07       1.96 r
-  scalarMul1/pointAdd/MS0/U1732/Y (NOR2BX2)               0.14       2.10 r
-  scalarMul1/pointAdd/MS0/U923/Y (OAI21X1)                0.08       2.18 f
-  scalarMul1/pointAdd/MS0/U385/Y (AOI21X1)                0.18       2.36 r
-  scalarMul1/pointAdd/MS0/U2181/Y (OAI21X1)               0.14       2.50 f
-  scalarMul1/pointAdd/MS0/U2180/Y (AOI21X4)               0.11       2.61 r
-  scalarMul1/pointAdd/MS0/U868/Y (NAND2X4)                0.08       2.69 f
-  scalarMul1/pointAdd/MS0/U863/Y (INVX2)                  0.06       2.75 r
-  scalarMul1/pointAdd/MS0/U2119/Y (XNOR2X1)               0.14       2.89 f
-  scalarMul1/pointAdd/MS0/U2118/Y (NOR2BX1)               0.16       3.04 r
-  scalarMul1/pointAdd/MS0/U1176/Y (NAND3X2)               0.12       3.17 f
-  scalarMul1/pointAdd/MS0/U1112/Y (NOR3X4)                0.09       3.26 r
-  scalarMul1/pointAdd/MS0/U1158/Y (NAND3X4)               0.10       3.36 f
-  scalarMul1/pointAdd/MS0/U1191/Y (NOR2X6)                0.10       3.46 r
-  scalarMul1/pointAdd/MS0/U1131/Y (NAND3X8)               0.09       3.55 f
-  scalarMul1/pointAdd/MS0/U1130/Y (NAND2X8)               0.11       3.66 r
-  scalarMul1/pointAdd/MS0/U2066/Y (NAND2X2)               0.06       3.72 f
-  scalarMul1/pointAdd/MS0/U52/Y (NAND2BX2)                0.10       3.82 r
-  scalarMul1/pointAdd/MS0/U1635/Y (AOI21X4)               0.10       3.92 f
-  scalarMul1/pointAdd/MS0/U1708/Y (BUFX8)                 0.14       4.06 f
-  scalarMul1/pointAdd/MS0/U1621/Y (BUFX8)                 0.12       4.17 f
-  scalarMul1/pointAdd/MS0/U832/Y (BUFX16)                 0.12       4.30 f
-  scalarMul1/pointAdd/MS0/U6144/Y (OAI21X1)               0.13       4.42 r
-  scalarMul1/pointAdd/MS0/U829/Y (XNOR2X1)                0.19       4.61 f
-  scalarMul1/pointAdd/MS0/result[170] (modularSub_1)      0.00       4.61 f
-  scalarMul1/pointAdd/U38/Y (NAND2XL)                     0.10       4.71 r
-  scalarMul1/pointAdd/U817/Y (NAND2XL)                    0.09       4.80 f
-  scalarMul1/pointAdd/U3725/Y (NOR2X1)                    0.12       4.92 r
-  scalarMul1/pointAdd/U864/Y (OAI21XL)                    0.08       5.00 f
-  scalarMul1/pointAdd/numberMul2/i_a[170] (numberMul_1)
-                                                          0.00       5.00 f
-  scalarMul1/pointAdd/numberMul2/U524/Y (OAI2BB1X1)       0.17       5.17 f
-  scalarMul1/pointAdd/numberMul2/a_r_reg[170]/D (DFFQX4)
-                                                          0.00       5.17 f
-  data arrival time                                                  5.17
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/Q (DFFQX2)     0.23       0.73 f
+  scalarMul1/pointAdd/numberMul2/U2350/Y (NAND2XL)        0.18       0.91 r
+  scalarMul1/pointAdd/numberMul2/U847/Y (OAI21X1)         0.10       1.01 f
+  scalarMul1/pointAdd/numberMul2/U516/Y (AOI21X1)         0.15       1.16 r
+  scalarMul1/pointAdd/numberMul2/U636/Y (OAI21X2)         0.09       1.25 f
+  scalarMul1/pointAdd/numberMul2/U502/Y (NAND2XL)         0.10       1.35 r
+  scalarMul1/pointAdd/numberMul2/U626/Y (NAND2X1)         0.11       1.46 f
+  scalarMul1/pointAdd/numberMul2/U1263/Y (NAND2BX1)       0.12       1.59 r
+  scalarMul1/pointAdd/numberMul2/U483/Y (NAND3X2)         0.14       1.73 f
+  scalarMul1/pointAdd/numberMul2/U395/Y (NAND2X1)         0.11       1.84 r
+  scalarMul1/pointAdd/numberMul2/U3414/Y (XOR2X1)         0.15       1.99 f
+  scalarMul1/pointAdd/numberMul2/U732/Y (AND4X2)          0.23       2.22 f
+  scalarMul1/pointAdd/numberMul2/U722/Y (NOR2BX2)         0.15       2.37 f
+  scalarMul1/pointAdd/numberMul2/U719/Y (NAND3X2)         0.12       2.49 r
+  scalarMul1/pointAdd/numberMul2/U1245/Y (NOR3X4)         0.09       2.58 f
+  scalarMul1/pointAdd/numberMul2/U589/Y (NAND3X4)         0.10       2.67 r
+  scalarMul1/pointAdd/numberMul2/U711/Y (NAND2X6)         0.08       2.76 f
+  scalarMul1/pointAdd/numberMul2/U702/Y (NOR2X6)          0.08       2.84 r
+  scalarMul1/pointAdd/numberMul2/U1544/Y (NOR2X4)         0.06       2.90 f
+  scalarMul1/pointAdd/numberMul2/U1542/Y (NOR2X6)         0.10       3.00 r
+  scalarMul1/pointAdd/numberMul2/U1500/Y (BUFX8)          0.11       3.11 r
+  scalarMul1/pointAdd/numberMul2/U328/Y (INVX3)           0.12       3.23 f
+  scalarMul1/pointAdd/numberMul2/U335/Y (AOI21XL)         0.19       3.41 r
+  scalarMul1/pointAdd/numberMul2/U9512/Y (OAI21X1)        0.10       3.51 f
+  scalarMul1/pointAdd/numberMul2/U9515/Y (XNOR2X1)        0.14       3.65 f
+  scalarMul1/pointAdd/numberMul2/U1119/Y (OAI2BB1X1)      0.17       3.82 f
+  scalarMul1/pointAdd/numberMul2/a_r_reg[201]/D (DFFHQX2)
+                                                          0.00       3.82 f
+  data arrival time                                                  3.82
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul2/a_r_reg[170]/CK (DFFQX4)
-                                                          0.00       5.40 r
-  library setup time                                     -0.23       5.17
-  data required time                                                 5.17
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/numberMul2/a_r_reg[201]/CK (DFFHQX2)
+                                                          0.00       4.00 r
+  library setup time                                     -0.18       3.82
+  data required time                                                 3.82
   --------------------------------------------------------------------------
-  data required time                                                 5.17
-  data arrival time                                                 -5.17
+  data required time                                                 3.82
+  data arrival time                                                 -3.82
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/state_r_reg[2]
+  Startpoint: scalarMul1/pointAdd/numberMul2/S_reg[38]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul0/ms_r_reg[14]
+  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[204]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -181,75 +139,55 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/state_r_reg[2]/CK (DFFHQX8)         0.00 #     0.50 r
-  scalarMul1/pointAdd/state_r_reg[2]/Q (DFFHQX8)          0.27       0.77 r
-  scalarMul1/pointAdd/U3366/Y (INVX12)                    0.06       0.83 f
-  scalarMul1/pointAdd/U3365/Y (NOR2X8)                    0.07       0.90 r
-  scalarMul1/pointAdd/U3364/Y (NAND2X8)                   0.10       1.00 f
-  scalarMul1/pointAdd/U3003/Y (INVX20)                    0.09       1.09 r
-  scalarMul1/pointAdd/U3716/Y (INVX16)                    0.05       1.14 f
-  scalarMul1/pointAdd/U3051/Y (INVX20)                    0.06       1.20 r
-  scalarMul1/pointAdd/U4052/Y (INVX16)                    0.05       1.25 f
-  scalarMul1/pointAdd/U349/Y (INVX3)                      0.06       1.31 r
-  scalarMul1/pointAdd/U4051/Y (AND2X1)                    0.15       1.46 r
-  scalarMul1/pointAdd/U4076/Y (NOR2X1)                    0.06       1.52 f
-  scalarMul1/pointAdd/U23842/Y (OAI21XL)                  0.10       1.62 r
-  scalarMul1/pointAdd/MS0/b[236] (modularSub_1)           0.00       1.62 r
-  scalarMul1/pointAdd/MS0/U3975/Y (INVX1)                 0.08       1.70 f
-  scalarMul1/pointAdd/MS0/U179/Y (OR2X1)                  0.29       2.00 f
-  scalarMul1/pointAdd/MS0/U4846/Y (INVXL)                 0.13       2.12 r
-  scalarMul1/pointAdd/MS0/U4850/S (ADDFX1)                0.28       2.41 r
-  scalarMul1/pointAdd/MS0/U4848/Y (NOR2XL)                0.07       2.47 f
-  scalarMul1/pointAdd/MS0/U417/Y (NOR2XL)                 0.21       2.69 r
-  scalarMul1/pointAdd/MS0/U4856/Y (NAND2X1)               0.11       2.80 f
-  scalarMul1/pointAdd/MS0/U70/Y (NOR2X1)                  0.14       2.93 r
-  scalarMul1/pointAdd/MS0/U65/Y (AOI21X1)                 0.13       3.06 f
-  scalarMul1/pointAdd/MS0/U426/Y (OAI21X1)                0.20       3.27 r
-  scalarMul1/pointAdd/MS0/U1265/Y (AOI21X2)               0.10       3.37 f
-  scalarMul1/pointAdd/MS0/U55/Y (OR2X2)                   0.20       3.57 f
-  scalarMul1/pointAdd/MS0/U1697/Y (NAND2X2)               0.07       3.64 r
-  scalarMul1/pointAdd/MS0/U1698/Y (NAND2X1)               0.06       3.70 f
-  scalarMul1/pointAdd/MS0/U842/Y (NAND2X1)                0.09       3.79 r
-  scalarMul1/pointAdd/MS0/U2140/Y (AOI21X2)               0.06       3.85 f
-  scalarMul1/pointAdd/MS0/U1738/Y (OAI21X2)               0.07       3.92 r
-  scalarMul1/pointAdd/MS0/U1696/Y (AOI21X2)               0.07       3.99 f
-  scalarMul1/pointAdd/MS0/U2134/Y (OAI21X2)               0.08       4.07 r
-  scalarMul1/pointAdd/MS0/U5271/Y (XNOR2X4)               0.16       4.23 f
-  scalarMul1/pointAdd/MS0/result[254] (modularSub_1)      0.00       4.23 f
-  scalarMul1/pointAdd/U4117/Y (NAND2X4)                   0.09       4.32 r
-  scalarMul1/pointAdd/U3348/Y (NAND3X6)                   0.10       4.41 f
-  scalarMul1/pointAdd/numberMul0/i_a[254] (numberMul_3)
-                                                          0.00       4.41 f
-  scalarMul1/pointAdd/numberMul0/U950/Y (NOR2X8)          0.10       4.51 r
-  scalarMul1/pointAdd/numberMul0/U965/Y (NOR2X6)          0.06       4.57 f
-  scalarMul1/pointAdd/numberMul0/U966/Y (NAND2X8)         0.07       4.64 r
-  scalarMul1/pointAdd/numberMul0/U82/Y (INVX6)            0.05       4.69 f
-  scalarMul1/pointAdd/numberMul0/U968/Y (NAND2X8)         0.05       4.75 r
-  scalarMul1/pointAdd/numberMul0/U74/Y (INVX12)           0.07       4.82 f
-  scalarMul1/pointAdd/numberMul0/U64/Y (BUFX16)           0.13       4.95 f
-  scalarMul1/pointAdd/numberMul0/U12640/Y (NAND2XL)       0.10       5.05 r
-  scalarMul1/pointAdd/numberMul0/U12641/Y (NAND4X1)       0.12       5.16 f
-  scalarMul1/pointAdd/numberMul0/ms_r_reg[14]/D (DFFQX4)
-                                                          0.00       5.16 f
-  data arrival time                                                  5.16
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/CK (DFFQX2)
+                                                          0.00 #     0.50 r
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/Q (DFFQX2)     0.23       0.73 f
+  scalarMul1/pointAdd/numberMul2/U2350/Y (NAND2XL)        0.18       0.91 r
+  scalarMul1/pointAdd/numberMul2/U847/Y (OAI21X1)         0.10       1.01 f
+  scalarMul1/pointAdd/numberMul2/U516/Y (AOI21X1)         0.15       1.16 r
+  scalarMul1/pointAdd/numberMul2/U636/Y (OAI21X2)         0.09       1.25 f
+  scalarMul1/pointAdd/numberMul2/U502/Y (NAND2XL)         0.10       1.35 r
+  scalarMul1/pointAdd/numberMul2/U626/Y (NAND2X1)         0.11       1.46 f
+  scalarMul1/pointAdd/numberMul2/U1263/Y (NAND2BX1)       0.12       1.59 r
+  scalarMul1/pointAdd/numberMul2/U483/Y (NAND3X2)         0.14       1.73 f
+  scalarMul1/pointAdd/numberMul2/U395/Y (NAND2X1)         0.11       1.84 r
+  scalarMul1/pointAdd/numberMul2/U3414/Y (XOR2X1)         0.15       1.99 f
+  scalarMul1/pointAdd/numberMul2/U732/Y (AND4X2)          0.23       2.22 f
+  scalarMul1/pointAdd/numberMul2/U722/Y (NOR2BX2)         0.15       2.37 f
+  scalarMul1/pointAdd/numberMul2/U719/Y (NAND3X2)         0.12       2.49 r
+  scalarMul1/pointAdd/numberMul2/U1245/Y (NOR3X4)         0.09       2.58 f
+  scalarMul1/pointAdd/numberMul2/U589/Y (NAND3X4)         0.10       2.67 r
+  scalarMul1/pointAdd/numberMul2/U711/Y (NAND2X6)         0.08       2.76 f
+  scalarMul1/pointAdd/numberMul2/U702/Y (NOR2X6)          0.08       2.84 r
+  scalarMul1/pointAdd/numberMul2/U1544/Y (NOR2X4)         0.06       2.90 f
+  scalarMul1/pointAdd/numberMul2/U1542/Y (NOR2X6)         0.10       3.00 r
+  scalarMul1/pointAdd/numberMul2/U1500/Y (BUFX8)          0.11       3.11 r
+  scalarMul1/pointAdd/numberMul2/U328/Y (INVX3)           0.12       3.23 f
+  scalarMul1/pointAdd/numberMul2/U9528/Y (AOI21XL)        0.19       3.41 r
+  scalarMul1/pointAdd/numberMul2/U9529/Y (OAI21X1)        0.10       3.51 f
+  scalarMul1/pointAdd/numberMul2/U9535/Y (XNOR2X1)        0.14       3.65 f
+  scalarMul1/pointAdd/numberMul2/U1063/Y (OAI2BB1X1)      0.17       3.82 f
+  scalarMul1/pointAdd/numberMul2/a_r_reg[204]/D (DFFHQX2)
+                                                          0.00       3.82 f
+  data arrival time                                                  3.82
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul0/ms_r_reg[14]/CK (DFFQX4)
-                                                          0.00       5.40 r
-  library setup time                                     -0.24       5.16
-  data required time                                                 5.16
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/numberMul2/a_r_reg[204]/CK (DFFHQX2)
+                                                          0.00       4.00 r
+  library setup time                                     -0.18       3.82
+  data required time                                                 3.82
   --------------------------------------------------------------------------
-  data required time                                                 5.16
-  data arrival time                                                 -5.16
+  data required time                                                 3.82
+  data arrival time                                                 -3.82
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: scalarMul1/pointAdd/numberMul2/S_reg[38]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[215]
+  Endpoint: scalarMul1/pointAdd/numberMul2/a_r_reg[54]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -258,54 +196,55 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/CK (DFFQX2)
                                                           0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U633/Y (AOI21XL)         0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U5857/Y (OAI21XL)        0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U5860/Y (XNOR2X1)        0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U5861/Y (AND2X1)         0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[215]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/pointAdd/numberMul2/S_reg[38]/Q (DFFQX2)     0.23       0.73 f
+  scalarMul1/pointAdd/numberMul2/U2350/Y (NAND2XL)        0.18       0.91 r
+  scalarMul1/pointAdd/numberMul2/U847/Y (OAI21X1)         0.10       1.01 f
+  scalarMul1/pointAdd/numberMul2/U516/Y (AOI21X1)         0.15       1.16 r
+  scalarMul1/pointAdd/numberMul2/U636/Y (OAI21X2)         0.09       1.25 f
+  scalarMul1/pointAdd/numberMul2/U502/Y (NAND2XL)         0.10       1.35 r
+  scalarMul1/pointAdd/numberMul2/U626/Y (NAND2X1)         0.11       1.46 f
+  scalarMul1/pointAdd/numberMul2/U1263/Y (NAND2BX1)       0.12       1.59 r
+  scalarMul1/pointAdd/numberMul2/U483/Y (NAND3X2)         0.14       1.73 f
+  scalarMul1/pointAdd/numberMul2/U395/Y (NAND2X1)         0.11       1.84 r
+  scalarMul1/pointAdd/numberMul2/U3414/Y (XOR2X1)         0.15       1.99 f
+  scalarMul1/pointAdd/numberMul2/U732/Y (AND4X2)          0.23       2.22 f
+  scalarMul1/pointAdd/numberMul2/U722/Y (NOR2BX2)         0.15       2.37 f
+  scalarMul1/pointAdd/numberMul2/U719/Y (NAND3X2)         0.12       2.49 r
+  scalarMul1/pointAdd/numberMul2/U1245/Y (NOR3X4)         0.09       2.58 f
+  scalarMul1/pointAdd/numberMul2/U589/Y (NAND3X4)         0.10       2.67 r
+  scalarMul1/pointAdd/numberMul2/U711/Y (NAND2X6)         0.08       2.76 f
+  scalarMul1/pointAdd/numberMul2/U702/Y (NOR2X6)          0.08       2.84 r
+  scalarMul1/pointAdd/numberMul2/U1544/Y (NOR2X4)         0.06       2.90 f
+  scalarMul1/pointAdd/numberMul2/U1542/Y (NOR2X6)         0.10       3.00 r
+  scalarMul1/pointAdd/numberMul2/U1500/Y (BUFX8)          0.11       3.11 r
+  scalarMul1/pointAdd/numberMul2/U328/Y (INVX3)           0.12       3.23 f
+  scalarMul1/pointAdd/numberMul2/U248/Y (AOI21XL)         0.19       3.41 r
+  scalarMul1/pointAdd/numberMul2/U8971/Y (OAI21X1)        0.10       3.51 f
+  scalarMul1/pointAdd/numberMul2/U8974/Y (XNOR2X1)        0.14       3.65 f
+  scalarMul1/pointAdd/numberMul2/U1104/Y (OAI2BB1X1)      0.17       3.82 f
+  scalarMul1/pointAdd/numberMul2/a_r_reg[54]/D (DFFHQX2)
+                                                          0.00       3.82 f
+  data arrival time                                                  3.82
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[215]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/numberMul2/a_r_reg[54]/CK (DFFHQX2)
+                                                          0.00       4.00 r
+  library setup time                                     -0.18       3.82
+  data required time                                                 3.82
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.82
+  data arrival time                                                 -3.82
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: reduction1/montgomeryInv/Ruv_r_reg[9]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[174]
+  Endpoint: reduction1/montgomeryInv/subLuv_r_reg[63]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -314,54 +253,47 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U5964/Y (AOI21XL)        0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U5965/Y (OAI21XL)        0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U5968/Y (XNOR2X1)        0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U5969/Y (AND2X1)         0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[174]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  reduction1/montgomeryInv/Ruv_r_reg[9]/CK (DFFQX1)       0.00 #     0.50 r
+  reduction1/montgomeryInv/Ruv_r_reg[9]/Q (DFFQX1)        0.27       0.77 f
+  reduction1/montgomeryInv/U11584/Y (INVXL)               0.11       0.88 r
+  reduction1/montgomeryInv/U11585/Y (NOR2XL)              0.07       0.95 f
+  reduction1/montgomeryInv/U11606/Y (OAI21XL)             0.21       1.16 r
+  reduction1/montgomeryInv/U11610/Y (AOI21XL)             0.13       1.29 f
+  reduction1/montgomeryInv/U11617/Y (OAI21XL)             0.21       1.50 r
+  reduction1/montgomeryInv/U11618/Y (AOI21X1)             0.10       1.60 f
+  reduction1/montgomeryInv/U11690/Y (OAI21X1)             0.16       1.76 r
+  reduction1/montgomeryInv/U673/Y (INVX1)                 0.12       1.88 f
+  reduction1/montgomeryInv/U15055/Y (OAI21XL)             0.22       2.10 r
+  reduction1/montgomeryInv/U289/Y (INVXL)                 0.14       2.24 f
+  reduction1/montgomeryInv/U15058/Y (OAI21XL)             0.23       2.47 r
+  reduction1/montgomeryInv/U290/Y (INVXL)                 0.13       2.60 f
+  reduction1/montgomeryInv/U15059/Y (OAI21XL)             0.23       2.83 r
+  reduction1/montgomeryInv/U15060/Y (INVXL)               0.11       2.94 f
+  reduction1/montgomeryInv/U15063/Y (OAI21XL)             0.26       3.20 r
+  reduction1/montgomeryInv/U628/Y (AOI21XL)               0.14       3.34 f
+  reduction1/montgomeryInv/U15067/Y (XOR2X1)              0.15       3.49 f
+  reduction1/montgomeryInv/U15068/Y (AO22X1)              0.25       3.74 f
+  reduction1/montgomeryInv/subLuv_r_reg[63]/D (DFFQX1)
+                                                          0.00       3.74 f
+  data arrival time                                                  3.74
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[174]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  reduction1/montgomeryInv/subLuv_r_reg[63]/CK (DFFQX1)
+                                                          0.00       4.00 r
+  library setup time                                     -0.26       3.74
+  data required time                                                 3.74
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.74
+  data arrival time                                                 -3.74
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: scalarMul1/cnt_r_reg[2]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[167]
+  Endpoint: scalarMul1/pointAdd/t2_r_reg[11]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -370,54 +302,51 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U9366/Y (AOI21XL)        0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U9367/Y (OAI21XL)        0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U9370/Y (XNOR2X1)        0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U9371/Y (AND2X1)         0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[167]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/cnt_r_reg[2]/CK (DFFHQX8)                    0.00 #     0.50 r
+  scalarMul1/cnt_r_reg[2]/Q (DFFHQX8)                     0.27       0.77 r
+  scalarMul1/U425/Y (NAND2X6)                             0.07       0.84 f
+  scalarMul1/U171/Y (INVX4)                               0.06       0.90 r
+  scalarMul1/U1181/Y (NAND2X6)                            0.07       0.97 f
+  scalarMul1/U2737/Y (NOR2X4)                             0.16       1.12 r
+  scalarMul1/U1173/Y (INVX3)                              0.09       1.21 f
+  scalarMul1/U129/Y (AOI2BB2X2)                           0.19       1.40 f
+  scalarMul1/U123/Y (NAND4BX1)                            0.11       1.51 r
+  scalarMul1/U2788/Y (NOR2X1)                             0.07       1.58 f
+  scalarMul1/U2454/Y (OAI2BB1X4)                          0.13       1.70 f
+  scalarMul1/U1120/Y (NAND3X2)                            0.10       1.80 r
+  scalarMul1/U1746/Y (NOR2X4)                             0.07       1.88 f
+  scalarMul1/U2452/Y (NOR2X8)                             0.12       2.00 r
+  scalarMul1/U2573/Y (BUFX8)                              0.17       2.16 r
+  scalarMul1/U785/Y (CLKMX2X2)                            0.21       2.37 r
+  scalarMul1/U102/Y (NAND2X1)                             0.06       2.44 f
+  scalarMul1/U757/Y (OAI21X1)                             0.17       2.61 r
+  scalarMul1/U1012/Y (NAND3X2)                            0.12       2.73 f
+  scalarMul1/U254/Y (INVXL)                               0.29       3.02 r
+  scalarMul1/U5741/Y (NAND2XL)                            0.12       3.14 f
+  scalarMul1/U5742/Y (XNOR2X1)                            0.16       3.30 f
+  scalarMul1/U973/Y (NAND2XL)                             0.10       3.40 r
+  scalarMul1/U1995/Y (OAI211XL)                           0.10       3.49 f
+  scalarMul1/pointAdd/i_t2[11] (PointAdd)                 0.00       3.49 f
+  scalarMul1/pointAdd/U24048/Y (AO22X1)                   0.25       3.74 f
+  scalarMul1/pointAdd/t2_r_reg[11]/D (DFFQX1)             0.00       3.74 f
+  data arrival time                                                  3.74
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[167]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/t2_r_reg[11]/CK (DFFQX1)            0.00       4.00 r
+  library setup time                                     -0.26       3.74
+  data required time                                                 3.74
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.74
+  data arrival time                                                 -3.74
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: scalarMul1/pointAdd/MA0/add_reg[113]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[114]
+  Endpoint: scalarMul1/pointAdd/MS0/sub_reg[34]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -426,54 +355,54 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U10061/Y (AOI21XL)       0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U10062/Y (OAI21XL)       0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U10065/Y (XNOR2X1)       0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U10066/Y (AND2X1)        0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[114]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/pointAdd/MA0/add_reg[113]/CK (DFFHQX2)       0.00 #     0.50 r
+  scalarMul1/pointAdd/MA0/add_reg[113]/Q (DFFHQX2)        0.21       0.71 r
+  scalarMul1/pointAdd/MA0/U1768/Y (NAND2X2)               0.05       0.76 f
+  scalarMul1/pointAdd/MA0/U1415/Y (NOR2X1)                0.12       0.88 r
+  scalarMul1/pointAdd/MA0/U2510/Y (NAND2X1)               0.09       0.97 f
+  scalarMul1/pointAdd/MA0/U2515/Y (NOR2X1)                0.09       1.06 r
+  scalarMul1/pointAdd/MA0/U1624/Y (NAND2X1)               0.08       1.14 f
+  scalarMul1/pointAdd/MA0/U1688/Y (NOR2X2)                0.08       1.22 r
+  scalarMul1/pointAdd/MA0/U476/Y (NAND2X2)                0.08       1.30 f
+  scalarMul1/pointAdd/MA0/U919/Y (INVX3)                  0.05       1.35 r
+  scalarMul1/pointAdd/MA0/U1366/Y (NAND2X2)               0.05       1.40 f
+  scalarMul1/pointAdd/MA0/U1793/Y (XOR2X4)                0.13       1.54 r
+  scalarMul1/pointAdd/MA0/U4434/Y (BUFX8)                 0.23       1.76 r
+  scalarMul1/pointAdd/MA0/U4729/Y (CLKMX2X2)              0.25       2.01 f
+  scalarMul1/pointAdd/MA0/result[20] (modularAdd_1)       0.00       2.01 f
+  scalarMul1/pointAdd/U19282/Y (OAI2BB1X1)                0.17       2.18 f
+  scalarMul1/pointAdd/MS0/b[20] (modularSub_1)            0.00       2.18 f
+  scalarMul1/pointAdd/MS0/U2088/Y (INVX1)                 0.08       2.26 r
+  scalarMul1/pointAdd/MS0/U2128/Y (NAND2XL)               0.09       2.35 f
+  scalarMul1/pointAdd/MS0/U23/Y (OAI21XL)                 0.24       2.59 r
+  scalarMul1/pointAdd/MS0/U328/Y (AOI21XL)                0.12       2.71 f
+  scalarMul1/pointAdd/MS0/U2133/Y (OAI21X1)               0.12       2.84 r
+  scalarMul1/pointAdd/MS0/U2147/Y (AOI21X1)               0.12       2.96 f
+  scalarMul1/pointAdd/MS0/U348/Y (OAI21X2)                0.08       3.04 r
+  scalarMul1/pointAdd/MS0/U2026/Y (INVXL)                 0.06       3.10 f
+  scalarMul1/pointAdd/MS0/U920/Y (CLKINVX1)               0.06       3.17 r
+  scalarMul1/pointAdd/MS0/U308/Y (INVX3)                  0.13       3.30 f
+  scalarMul1/pointAdd/MS0/U5460/Y (OAI21XL)               0.23       3.53 r
+  scalarMul1/pointAdd/MS0/U5462/Y (XNOR2X1)               0.20       3.74 f
+  scalarMul1/pointAdd/MS0/sub_reg[34]/D (DFFQX1)          0.00       3.74 f
+  data arrival time                                                  3.74
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[114]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/MS0/sub_reg[34]/CK (DFFQX1)         0.00       4.00 r
+  library setup time                                     -0.26       3.74
+  data required time                                                 3.74
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.74
+  data arrival time                                                 -3.74
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: scalarMul1/pointAdd/MA0/add_reg[113]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[112]
+  Endpoint: scalarMul1/pointAdd/MS0/sub_reg[37]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -482,54 +411,54 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U10081/Y (AOI21XL)       0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U10082/Y (OAI21XL)       0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U10085/Y (XNOR2X1)       0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U10086/Y (AND2X1)        0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[112]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/pointAdd/MA0/add_reg[113]/CK (DFFHQX2)       0.00 #     0.50 r
+  scalarMul1/pointAdd/MA0/add_reg[113]/Q (DFFHQX2)        0.21       0.71 r
+  scalarMul1/pointAdd/MA0/U1768/Y (NAND2X2)               0.05       0.76 f
+  scalarMul1/pointAdd/MA0/U1415/Y (NOR2X1)                0.12       0.88 r
+  scalarMul1/pointAdd/MA0/U2510/Y (NAND2X1)               0.09       0.97 f
+  scalarMul1/pointAdd/MA0/U2515/Y (NOR2X1)                0.09       1.06 r
+  scalarMul1/pointAdd/MA0/U1624/Y (NAND2X1)               0.08       1.14 f
+  scalarMul1/pointAdd/MA0/U1688/Y (NOR2X2)                0.08       1.22 r
+  scalarMul1/pointAdd/MA0/U476/Y (NAND2X2)                0.08       1.30 f
+  scalarMul1/pointAdd/MA0/U919/Y (INVX3)                  0.05       1.35 r
+  scalarMul1/pointAdd/MA0/U1366/Y (NAND2X2)               0.05       1.40 f
+  scalarMul1/pointAdd/MA0/U1793/Y (XOR2X4)                0.13       1.54 r
+  scalarMul1/pointAdd/MA0/U4434/Y (BUFX8)                 0.23       1.76 r
+  scalarMul1/pointAdd/MA0/U4729/Y (CLKMX2X2)              0.25       2.01 f
+  scalarMul1/pointAdd/MA0/result[20] (modularAdd_1)       0.00       2.01 f
+  scalarMul1/pointAdd/U19282/Y (OAI2BB1X1)                0.17       2.18 f
+  scalarMul1/pointAdd/MS0/b[20] (modularSub_1)            0.00       2.18 f
+  scalarMul1/pointAdd/MS0/U2088/Y (INVX1)                 0.08       2.26 r
+  scalarMul1/pointAdd/MS0/U2128/Y (NAND2XL)               0.09       2.35 f
+  scalarMul1/pointAdd/MS0/U23/Y (OAI21XL)                 0.24       2.59 r
+  scalarMul1/pointAdd/MS0/U328/Y (AOI21XL)                0.12       2.71 f
+  scalarMul1/pointAdd/MS0/U2133/Y (OAI21X1)               0.12       2.84 r
+  scalarMul1/pointAdd/MS0/U2147/Y (AOI21X1)               0.12       2.96 f
+  scalarMul1/pointAdd/MS0/U348/Y (OAI21X2)                0.08       3.04 r
+  scalarMul1/pointAdd/MS0/U2026/Y (INVXL)                 0.06       3.10 f
+  scalarMul1/pointAdd/MS0/U920/Y (CLKINVX1)               0.06       3.17 r
+  scalarMul1/pointAdd/MS0/U308/Y (INVX3)                  0.13       3.30 f
+  scalarMul1/pointAdd/MS0/U5558/Y (OAI21XL)               0.23       3.53 r
+  scalarMul1/pointAdd/MS0/U5560/Y (XNOR2X1)               0.20       3.74 f
+  scalarMul1/pointAdd/MS0/sub_reg[37]/D (DFFQX1)          0.00       3.74 f
+  data arrival time                                                  3.74
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[112]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/MS0/sub_reg[37]/CK (DFFQX1)         0.00       4.00 r
+  library setup time                                     -0.26       3.74
+  data required time                                                 3.74
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.74
+  data arrival time                                                 -3.74
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: scalarMul1/pointAdd/MA0/add_reg[113]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[108]
+  Endpoint: scalarMul1/pointAdd/MS0/sub_reg[38]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -538,54 +467,54 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U9602/Y (AOI21XL)        0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U9603/Y (OAI21XL)        0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U9606/Y (XNOR2X1)        0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U9607/Y (AND2X1)         0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[108]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/pointAdd/MA0/add_reg[113]/CK (DFFHQX2)       0.00 #     0.50 r
+  scalarMul1/pointAdd/MA0/add_reg[113]/Q (DFFHQX2)        0.21       0.71 r
+  scalarMul1/pointAdd/MA0/U1768/Y (NAND2X2)               0.05       0.76 f
+  scalarMul1/pointAdd/MA0/U1415/Y (NOR2X1)                0.12       0.88 r
+  scalarMul1/pointAdd/MA0/U2510/Y (NAND2X1)               0.09       0.97 f
+  scalarMul1/pointAdd/MA0/U2515/Y (NOR2X1)                0.09       1.06 r
+  scalarMul1/pointAdd/MA0/U1624/Y (NAND2X1)               0.08       1.14 f
+  scalarMul1/pointAdd/MA0/U1688/Y (NOR2X2)                0.08       1.22 r
+  scalarMul1/pointAdd/MA0/U476/Y (NAND2X2)                0.08       1.30 f
+  scalarMul1/pointAdd/MA0/U919/Y (INVX3)                  0.05       1.35 r
+  scalarMul1/pointAdd/MA0/U1366/Y (NAND2X2)               0.05       1.40 f
+  scalarMul1/pointAdd/MA0/U1793/Y (XOR2X4)                0.13       1.54 r
+  scalarMul1/pointAdd/MA0/U4434/Y (BUFX8)                 0.23       1.76 r
+  scalarMul1/pointAdd/MA0/U4729/Y (CLKMX2X2)              0.25       2.01 f
+  scalarMul1/pointAdd/MA0/result[20] (modularAdd_1)       0.00       2.01 f
+  scalarMul1/pointAdd/U19282/Y (OAI2BB1X1)                0.17       2.18 f
+  scalarMul1/pointAdd/MS0/b[20] (modularSub_1)            0.00       2.18 f
+  scalarMul1/pointAdd/MS0/U2088/Y (INVX1)                 0.08       2.26 r
+  scalarMul1/pointAdd/MS0/U2128/Y (NAND2XL)               0.09       2.35 f
+  scalarMul1/pointAdd/MS0/U23/Y (OAI21XL)                 0.24       2.59 r
+  scalarMul1/pointAdd/MS0/U328/Y (AOI21XL)                0.12       2.71 f
+  scalarMul1/pointAdd/MS0/U2133/Y (OAI21X1)               0.12       2.84 r
+  scalarMul1/pointAdd/MS0/U2147/Y (AOI21X1)               0.12       2.96 f
+  scalarMul1/pointAdd/MS0/U348/Y (OAI21X2)                0.08       3.04 r
+  scalarMul1/pointAdd/MS0/U2026/Y (INVXL)                 0.06       3.10 f
+  scalarMul1/pointAdd/MS0/U920/Y (CLKINVX1)               0.06       3.17 r
+  scalarMul1/pointAdd/MS0/U308/Y (INVX3)                  0.13       3.30 f
+  scalarMul1/pointAdd/MS0/U5484/Y (OAI21XL)               0.23       3.53 r
+  scalarMul1/pointAdd/MS0/U5486/Y (XNOR2X1)               0.20       3.74 f
+  scalarMul1/pointAdd/MS0/sub_reg[38]/D (DFFQX1)          0.00       3.74 f
+  data arrival time                                                  3.74
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[108]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/MS0/sub_reg[38]/CK (DFFQX1)         0.00       4.00 r
+  library setup time                                     -0.26       3.74
+  data required time                                                 3.74
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.74
+  data arrival time                                                 -3.74
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
 
-  Startpoint: scalarMul1/pointAdd/numberMul1/S_reg[132]
+  Startpoint: scalarMul1/pointAdd/MA0/add_reg[113]
               (rising edge-triggered flip-flop clocked by i_clk)
-  Endpoint: scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[95]
+  Endpoint: scalarMul1/pointAdd/MS0/sub_reg[42]
             (rising edge-triggered flip-flop clocked by i_clk)
   Path Group: i_clk
   Path Type: max
@@ -594,47 +523,47 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock i_clk (rise edge)                                 0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/CK (DFFQX1)
-                                                          0.00 #     0.50 r
-  scalarMul1/pointAdd/numberMul1/S_reg[132]/Q (DFFQX1)
-                                                          0.38       0.88 r
-  scalarMul1/pointAdd/numberMul1/U2362/Y (NOR2XL)         0.08       0.96 f
-  scalarMul1/pointAdd/numberMul1/U2363/Y (NOR2XL)         0.18       1.15 r
-  scalarMul1/pointAdd/numberMul1/U2577/Y (AOI21X1)        0.13       1.28 f
-  scalarMul1/pointAdd/numberMul1/U2585/Y (OAI21X1)        0.20       1.47 r
-  scalarMul1/pointAdd/numberMul1/U2598/Y (AOI21X1)        0.13       1.60 f
-  scalarMul1/pointAdd/numberMul1/U867/Y (OAI21X1)         0.19       1.80 r
-  scalarMul1/pointAdd/numberMul1/U866/Y (AOI21X1)         0.12       1.92 f
-  scalarMul1/pointAdd/numberMul1/U868/Y (OAI21XL)         0.18       2.10 r
-  scalarMul1/pointAdd/numberMul1/U242/Y (AOI21XL)         0.10       2.20 f
-  scalarMul1/pointAdd/numberMul1/U869/Y (OAI21XL)         0.26       2.46 r
-  scalarMul1/pointAdd/numberMul1/U2792/Y (XNOR2XL)        0.21       2.67 r
-  scalarMul1/pointAdd/numberMul1/U2800/Y (AND4X1)         0.24       2.91 r
-  scalarMul1/pointAdd/numberMul1/U2801/Y (NAND3X1)        0.10       3.01 f
-  scalarMul1/pointAdd/numberMul1/U2824/Y (NOR4X1)         0.17       3.18 r
-  scalarMul1/pointAdd/numberMul1/U2977/Y (NAND4X1)        0.14       3.31 f
-  scalarMul1/pointAdd/numberMul1/U744/Y (OAI21X2)         0.19       3.50 r
-  scalarMul1/pointAdd/numberMul1/U3383/Y (NOR2X2)         0.07       3.58 f
-  scalarMul1/pointAdd/numberMul1/U348/Y (OA21XL)          0.44       4.02 f
-  scalarMul1/pointAdd/numberMul1/U634/Y (INVX3)           0.46       4.49 r
-  scalarMul1/pointAdd/numberMul1/U9584/Y (AOI21XL)        0.13       4.62 f
-  scalarMul1/pointAdd/numberMul1/U9585/Y (OAI21XL)        0.14       4.76 r
-  scalarMul1/pointAdd/numberMul1/U9588/Y (XNOR2X1)        0.21       4.97 f
-  scalarMul1/pointAdd/numberMul1/U9589/Y (AND2X1)         0.18       5.15 f
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[95]/D (DFFQX1)
-                                                          0.00       5.15 f
-  data arrival time                                                  5.15
+  scalarMul1/pointAdd/MA0/add_reg[113]/CK (DFFHQX2)       0.00 #     0.50 r
+  scalarMul1/pointAdd/MA0/add_reg[113]/Q (DFFHQX2)        0.21       0.71 r
+  scalarMul1/pointAdd/MA0/U1768/Y (NAND2X2)               0.05       0.76 f
+  scalarMul1/pointAdd/MA0/U1415/Y (NOR2X1)                0.12       0.88 r
+  scalarMul1/pointAdd/MA0/U2510/Y (NAND2X1)               0.09       0.97 f
+  scalarMul1/pointAdd/MA0/U2515/Y (NOR2X1)                0.09       1.06 r
+  scalarMul1/pointAdd/MA0/U1624/Y (NAND2X1)               0.08       1.14 f
+  scalarMul1/pointAdd/MA0/U1688/Y (NOR2X2)                0.08       1.22 r
+  scalarMul1/pointAdd/MA0/U476/Y (NAND2X2)                0.08       1.30 f
+  scalarMul1/pointAdd/MA0/U919/Y (INVX3)                  0.05       1.35 r
+  scalarMul1/pointAdd/MA0/U1366/Y (NAND2X2)               0.05       1.40 f
+  scalarMul1/pointAdd/MA0/U1793/Y (XOR2X4)                0.13       1.54 r
+  scalarMul1/pointAdd/MA0/U4434/Y (BUFX8)                 0.23       1.76 r
+  scalarMul1/pointAdd/MA0/U4729/Y (CLKMX2X2)              0.25       2.01 f
+  scalarMul1/pointAdd/MA0/result[20] (modularAdd_1)       0.00       2.01 f
+  scalarMul1/pointAdd/U19282/Y (OAI2BB1X1)                0.17       2.18 f
+  scalarMul1/pointAdd/MS0/b[20] (modularSub_1)            0.00       2.18 f
+  scalarMul1/pointAdd/MS0/U2088/Y (INVX1)                 0.08       2.26 r
+  scalarMul1/pointAdd/MS0/U2128/Y (NAND2XL)               0.09       2.35 f
+  scalarMul1/pointAdd/MS0/U23/Y (OAI21XL)                 0.24       2.59 r
+  scalarMul1/pointAdd/MS0/U328/Y (AOI21XL)                0.12       2.71 f
+  scalarMul1/pointAdd/MS0/U2133/Y (OAI21X1)               0.12       2.84 r
+  scalarMul1/pointAdd/MS0/U2147/Y (AOI21X1)               0.12       2.96 f
+  scalarMul1/pointAdd/MS0/U348/Y (OAI21X2)                0.08       3.04 r
+  scalarMul1/pointAdd/MS0/U2026/Y (INVXL)                 0.06       3.10 f
+  scalarMul1/pointAdd/MS0/U920/Y (CLKINVX1)               0.06       3.17 r
+  scalarMul1/pointAdd/MS0/U308/Y (INVX3)                  0.13       3.30 f
+  scalarMul1/pointAdd/MS0/U5477/Y (OAI21XL)               0.23       3.53 r
+  scalarMul1/pointAdd/MS0/U5479/Y (XNOR2X1)               0.20       3.74 f
+  scalarMul1/pointAdd/MS0/sub_reg[42]/D (DFFQX1)          0.00       3.74 f
+  data arrival time                                                  3.74
 
-  clock i_clk (rise edge)                                 5.00       5.00
-  clock network delay (ideal)                             0.50       5.50
-  clock uncertainty                                      -0.10       5.40
-  scalarMul1/pointAdd/numberMul1/o_montgomery_r_reg[95]/CK (DFFQX1)
-                                                          0.00       5.40 r
-  library setup time                                     -0.25       5.15
-  data required time                                                 5.15
+  clock i_clk (rise edge)                                 3.60       3.60
+  clock network delay (ideal)                             0.50       4.10
+  clock uncertainty                                      -0.10       4.00
+  scalarMul1/pointAdd/MS0/sub_reg[42]/CK (DFFQX1)         0.00       4.00 r
+  library setup time                                     -0.26       3.74
+  data required time                                                 3.74
   --------------------------------------------------------------------------
-  data required time                                                 5.15
-  data arrival time                                                 -5.15
+  data required time                                                 3.74
+  data arrival time                                                 -3.74
   --------------------------------------------------------------------------
   slack (MET)                                                        0.00
 
