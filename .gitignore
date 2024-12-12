@@ -8,4 +8,9 @@
 !*.ddc
 !*.sdf
 !*ed25519_syn*
+!*.view
+!*.conf
+!*.ioc
+!*.cmd
+!DBS/*
 !*/
