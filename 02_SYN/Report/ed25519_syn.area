@@ -3,29 +3,29 @@
 Report : area
 Design : ed25519
 Version: U-2022.12
-Date   : Tue Dec 10 21:48:31 2024
+Date   : Thu Dec 12 13:13:32 2024
 ****************************************
 
 Library(s) Used:
 
     slow (File: /home/raid7_2/course/cvsd/CBDK_IC_Contest/CIC/SynopsysDC/db/slow.db)
 
-Number of ports:                        18839
-Number of nets:                        189713
-Number of cells:                       171913
-Number of combinational cells:         152232
-Number of sequential cells:             17616
+Number of ports:                        10113
+Number of nets:                        180693
+Number of cells:                       169438
+Number of combinational cells:         151810
+Number of sequential cells:             17618
 Number of macros/black boxes:               0
-Number of buf/inv:                      27483
-Number of references:                      40
+Number of buf/inv:                      26425
+Number of references:                      47
 
-Combinational area:            1158616.374760
-Buf/Inv area:                   104091.356312
-Noncombinational area:          499653.460531
+Combinational area:            1151609.509653
+Buf/Inv area:                    99347.123315
+Noncombinational area:          492673.751600
 Macro/Black Box area:                0.000000
 Net Interconnect area:      undefined  (No wire load specified)
 
-Total cell area:               1658269.835291
+Total cell area:               1644283.261254
 Total area:                 undefined
 
 Hierarchical area distribution
@@ -35,30 +35,17 @@ Hierarchical area distribution
                                   ---------------------  --------------------------------- 
 Hierarchical cell                 Absolute      Percent  Combi-        Noncombi-    Black-
                                   Total         Total    national      national     boxes   Design
---------------------------------  ------------  -------  ------------  -----------  ------  -------------
-ed25519                           1658269.8353    100.0    22056.0154   21412.7014  0.0000  ed25519
-reduction1                         334771.4119     20.2    36443.1773   19565.9301  0.0000  Reduction
-reduction1/montgomery              112549.5013      6.8    88919.9956   23629.5057  0.0000  Montgomery
-reduction1/montgomeryInv           166212.8032     10.0   113530.5985   52682.2047  0.0000  MontgomeryInv
-scalarMul1                        1280029.7066     77.2   145925.4757  104680.3571  0.0000  ScalarMul
-scalarMul1/pointAdd               1029423.8738     62.1   202484.5434   59337.7100  0.0000  PointAdd
-scalarMul1/pointAdd/MA0             45924.8540      2.8    35137.8769   10786.9770  0.0000  modularAdd_1
-scalarMul1/pointAdd/MA1             44293.6526      2.7    33369.1862   10924.4664  0.0000  modularAdd_0
-scalarMul1/pointAdd/MS0             46683.5918      2.8    37565.1589    9118.4328  0.0000  modularSub_1
-scalarMul1/pointAdd/MS1             40552.5832      2.4    32367.7202    8184.8629  0.0000  modularSub_0
-scalarMul1/pointAdd/numberMul0     147132.3292      8.9    95745.2413   44064.5046  0.0000  numberMul_3
-scalarMul1/pointAdd/numberMul0/csa0
-                                     7322.5834      0.4     7322.5834       0.0000  0.0000  CSA_3
-scalarMul1/pointAdd/numberMul1     148249.2183      8.9    94954.2528   45972.3821  0.0000  numberMul_2
-scalarMul1/pointAdd/numberMul1/csa0
-                                     7322.5834      0.4     7322.5834       0.0000  0.0000  CSA_2
-scalarMul1/pointAdd/numberMul2     147690.7738      8.9    95887.8227   44480.3676  0.0000  numberMul_1
-scalarMul1/pointAdd/numberMul2/csa0
-                                     7322.5834      0.4     7322.5834       0.0000  0.0000  CSA_1
-scalarMul1/pointAdd/numberMul3     147074.6175      8.9    94938.9761   44813.0580  0.0000  numberMul_0
-scalarMul1/pointAdd/numberMul3/csa0
-                                     7322.5834      0.4     7322.5834       0.0000  0.0000  CSA_0
---------------------------------  ------------  -------  ------------  -----------  ------  -------------
-Total                                                    1158616.3748  499653.4605  0.0000
+--------------------------------  ------------  -------  ------------  -----------  ------  -----------
+ed25519                           1644283.2613    100.0    22062.8050   21416.0962  0.0000  ed25519
+reduction1                         328379.0036     20.0   151408.0788   70143.3587  0.0000  Reduction
+reduction1/montgomery              106827.5661      6.5    82941.7529   23885.8132  0.0000  Montgomery
+scalarMul1                        1272425.3565     77.4   144774.6385  105456.0687  0.0000  ScalarMul
+scalarMul1/pointAdd               1022194.6493     62.2   344465.2625   98695.3241  0.0000  PointAdd
+scalarMul1/pointAdd/numberMul0     144659.2179      8.8   101950.9360   42708.2819  0.0000  numberMul_3
+scalarMul1/pointAdd/numberMul1     146224.2206      8.9   101419.6496   44804.5710  0.0000  numberMul_2
+scalarMul1/pointAdd/numberMul2     145153.1611      8.8   101424.7417   43728.4194  0.0000  numberMul_1
+scalarMul1/pointAdd/numberMul3     142997.4631      8.7   101161.6447   41835.8183  0.0000  numberMul_0
+--------------------------------  ------------  -------  ------------  -----------  ------  -----------
+Total                                                    1151609.5097  492673.7516  0.0000
 
 1

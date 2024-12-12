@@ -46,7 +46,7 @@ uniquify
 set_fix_multiple_port_nets -all -buffer_constants [get_designs *]
 
 #set_clock_gating_style -max_fanout 4
-compile_ultra -no_autoungroup
+compile_ultra
 
 
 
